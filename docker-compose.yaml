@@ -1,0 +1,27 @@
+# docker-compose.yml
+version: "3.9"
+services:
+  app:
+    image: node:20-bookworm
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules_cache:/app/node_modules
+    command: sh -c "npm ci && npx expo start --host lan"
+    environment:
+      # Hot reload estable dentro de contenedores (especialmente en Windows/Mac)
+      CHOKIDAR_USEPOLLING: "true"
+      EXPO_DISABLE_TELEMETRY: "1"
+      # Si necesitas que Expo DevTools/Metro publiquen la IP del host:
+      # REACT_NATIVE_PACKAGER_HOSTNAME: "TU_IP_LOCAL"
+    ports:
+      - "8081:8081"
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "19006:19006"
+    stdin_open: true
+    tty: true
+
+volumes:
+  node_modules_cache:
