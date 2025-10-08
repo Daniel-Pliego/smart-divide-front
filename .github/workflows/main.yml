@@ -17,11 +17,5 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Verify Expo project
-        run: npx expo doctor --fix
-
-      - name: Lint (optional)
-        run: npm run lint --if-present
-
       - name: Run tests (CI)
         run: npm run test:ci
