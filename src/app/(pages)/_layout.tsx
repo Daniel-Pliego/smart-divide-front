@@ -1,11 +1,11 @@
-import { MobileBottomTabs } from "@/src/shared/layout";
+import { MobileBottomTabs } from "@/shared/layout";
 import { Stack } from "expo-router";
 import { CircleUserRound, Contact, UsersRound } from "lucide-react-native";
 
 const PAGE_OPTIONS = [
     {
         label: "Grupos",
-        redirectTo: "(pages)/group",
+        redirectTo: "(pages)/groups",
         icon: UsersRound,
     },
     {

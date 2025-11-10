@@ -1,6 +1,6 @@
-import { HStack } from "@/components/ui/hstack";
-import { Icon } from "@/components/ui/icon";
-import { Toast, ToastDescription, useToast } from "@/components/ui/toast";
+import { HStack } from "@gluestack/hstack";
+import { Icon } from "@gluestack/icon";
+import { Toast, ToastDescription, useToast } from "@gluestack/toast";
 import { AlertCircle, CheckCircle2 } from "lucide-react-native";
 
 type ToastType = "success" | "error";

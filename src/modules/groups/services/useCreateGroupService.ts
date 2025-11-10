@@ -1,5 +1,5 @@
-import { GROUP_LIST_ITEMS } from "@/src/modules/groups/mock/groupListItems";
-import { GroupFormData } from "@/src/modules/groups/types";
+import { GROUP_LIST_ITEMS } from "@/modules/groups/mock/groupListItems";
+import { GroupFormData } from "@/modules/groups/types";
 
 let id = 1;
 

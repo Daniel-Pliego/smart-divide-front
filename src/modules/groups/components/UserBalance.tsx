@@ -1,7 +1,7 @@
-import { Box } from "@/components/ui/box";
-import { HStack } from "@/components/ui/hstack";
+import { toMoney } from "@/shared/utils";
+import { Box } from "@gluestack/box";
+import { HStack } from "@gluestack/hstack";
 import { Text } from "react-native";
-import { toMoney } from "../../../shared/utils";
 
 interface UserBalanceProps {
     totalCredits: number;

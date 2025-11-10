@@ -1,7 +1,7 @@
-import { HStack } from "@/components/ui/hstack";
-import { Icon } from "@/components/ui/icon";
-import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
-import { Menu, MenuItem, MenuItemLabel } from "@/components/ui/menu";
+import { HStack } from "@gluestack/hstack";
+import { Icon } from "@gluestack/icon";
+import { Input, InputField, InputIcon, InputSlot } from "@gluestack/input";
+import { Menu, MenuItem, MenuItemLabel } from "@gluestack/menu";
 import { SearchIcon, SlidersHorizontal } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { Pressable } from "react-native";

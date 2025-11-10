@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@/components/ui/icon";
+import { ChevronDownIcon } from "@gluestack/icon";
 import {
     Select,
     SelectBackdrop,
@@ -10,7 +10,7 @@ import {
     SelectItem,
     SelectPortal,
     SelectTrigger,
-} from "@/components/ui/select";
+} from "@gluestack/select";
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import { InputWrapperController } from "./InputWrapperController";

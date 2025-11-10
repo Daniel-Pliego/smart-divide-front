@@ -1,4 +1,4 @@
-import { FilterOption } from "@/src/shared/components/Filters";
+import { FilterOption } from "@/shared/components/Filters";
 
 export type GroupFilterType = "all" | "totalDebts" | "totalCredits";
 

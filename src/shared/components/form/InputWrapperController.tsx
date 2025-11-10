@@ -5,7 +5,7 @@ import {
     FormControlErrorText,
     FormControlLabel,
     FormControlLabelText,
-} from "@/components/ui/form-control";
+} from "@gluestack/form-control";
 import { AlertCircleIcon } from "lucide-react-native";
 import React from "react";
 import {
