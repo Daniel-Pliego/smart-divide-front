@@ -1,4 +1,4 @@
-import { Textarea, TextareaInput } from "@/components/ui/textarea";
+import { Textarea, TextareaInput } from "@gluestack/textarea";
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import { InputWrapperController } from "./InputWrapperController";

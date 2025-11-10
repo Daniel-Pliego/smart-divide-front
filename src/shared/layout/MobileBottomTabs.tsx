@@ -1,5 +1,5 @@
-import { HStack } from "@/components/ui/hstack";
-import { Icon } from "@/components/ui/icon";
+import { HStack } from "@gluestack/hstack";
+import { Icon } from "@gluestack/icon";
 import { RelativePathString, useRouter } from "expo-router";
 import { type LucideIcon } from "lucide-react-native";
 import React, { useState } from "react";

@@ -1,5 +1,5 @@
-import { useCreateGroupsService } from "@/src/modules/groups/services";
-import { useAppToast } from "@/src/shared/hooks";
+import { useCreateGroupsService } from "@/modules/groups/services";
+import { useAppToast } from "@/shared/hooks";
 import { useRouter } from "expo-router";
 import { GroupFormData } from "../types";
 

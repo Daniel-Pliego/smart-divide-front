@@ -4,7 +4,10 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
+      ],
+      "@gluestack/*": [
+        "./src/lib/gluestack-ui/ui/*"
       ],
       "tailwind.config": [
         "./tailwind.config.js"

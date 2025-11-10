@@ -1,7 +1,7 @@
-import { useGetGroupsService } from "@/src/modules/groups/services";
-import { GroupListItem } from "@/src/modules/groups/types";
+import { useGetGroupsService } from "@/modules/groups/services";
+import { GroupListItem } from "@/modules/groups/types";
 import { useEffect, useState } from "react";
-import { GroupFilterType } from "../data/FilterOptions";
+import { GroupFilterType } from "../constants/FilterOptions";
 
 export const useGroupsState = () => {
     const { groupListItems } = useGetGroupsService();

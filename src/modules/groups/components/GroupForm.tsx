@@ -1,15 +1,15 @@
-import { Box } from "@/components/ui/box";
-import { Button, ButtonText } from "@/components/ui/button";
-import { HStack } from "@/components/ui/hstack";
-import { Icon } from "@/components/ui/icon";
-import { GROUP_TYPES, ICON_BY_GROUP_TYPE } from "@/src/modules/groups/data";
-import { GroupFormDataSchema } from "@/src/modules/groups/schemas";
-import { GroupFormData } from "@/src/modules/groups/types";
+import { GROUP_TYPES, ICON_BY_GROUP_TYPE } from "@/modules/groups/constants";
+import { GroupFormDataSchema } from "@/modules/groups/schemas";
+import { GroupFormData } from "@/modules/groups/types";
 import {
-    InputTextControlled,
-    SelectControlled,
-    TextAreaControlled,
-} from "@/src/shared/components/form";
+  InputTextControlled,
+  SelectControlled,
+  TextAreaControlled,
+} from "@/shared/components/form";
+import { Box } from "@gluestack/box";
+import { Button, ButtonText } from "@gluestack/button";
+import { HStack } from "@gluestack/hstack";
+import { Icon } from "@gluestack/icon";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Router } from "expo-router";
 import { useForm } from "react-hook-form";

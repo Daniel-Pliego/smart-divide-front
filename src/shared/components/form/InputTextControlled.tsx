@@ -1,4 +1,4 @@
-import { Input, InputField } from "@/components/ui/input";
+import { Input, InputField } from "@gluestack/input";
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import { InputWrapperController } from "./InputWrapperController";
