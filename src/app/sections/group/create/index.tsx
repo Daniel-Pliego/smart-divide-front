@@ -1,14 +1,8 @@
 import { GroupForm } from "@/modules/groups/components";
 import { useCreateGroupState } from "@/modules/groups/hooks";
 
-const CreateGroupPage = () => {
+export default function GroupPage() {
     const formState = useCreateGroupState();
 
-    return (
-        <>
-            <GroupForm {...formState} />
-        </>
-    );
-};
-
-export default CreateGroupPage;
+    return <GroupForm {...formState} />;
+}

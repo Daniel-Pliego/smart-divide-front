@@ -1,38 +1,70 @@
 import {
-    Briefcase,
-    Heart,
-    Home,
-    LucideIcon,
-    PartyPopper,
-    Plane,
-    School,
-    ShoppingBag,
-    Users,
-    Utensils,
-    Wallet,
+  Briefcase,
+  Heart,
+  Home,
+  LucideIcon,
+  PartyPopper,
+  Plane,
+  School,
+  ShoppingBag,
+  Users,
+  Utensils,
+  Wallet,
 } from "lucide-react-native";
 
-interface GroupIconType {
-    [key: string]: LucideIcon;
+export interface GroupIconType {
+    [key: string]: {
+        icon: LucideIcon;
+        color: string;
+    };
 }
-
-interface GroupType {
+export interface GroupType {
     label: string;
     value: keyof GroupIconType;
 }
 
-export const ICON_BY_GROUP_TYPE: GroupIconType = {
-    trip: Plane,
-    household: Home,
-    friends: Users,
-    shopping: ShoppingBag,
-    food: Utensils,
-    work: Briefcase,
-    couple: Heart,
-    party: PartyPopper,
-    study: School,
-    other: Wallet,
-};
+export const ICON_BY_GROUP_TYPE = {
+    trip: {
+        icon: Plane,
+        color: "bg-sky-500/70",
+    },
+    household: {
+        icon: Home,
+        color: "bg-amber-500/70",
+    },
+    friends: {
+        icon: Users,
+        color: "bg-pink-500/70",
+    },
+    shopping: {
+        icon: ShoppingBag,
+        color: "bg-emerald-500/70",
+    },
+    food: {
+        icon: Utensils,
+        color: "bg-orange-500/70",
+    },
+    work: {
+        icon: Briefcase,
+        color: "bg-indigo-500/70",
+    },
+    couple: {
+        icon: Heart,
+        color: "bg-rose-500/70",
+    },
+    party: {
+        icon: PartyPopper,
+        color: "bg-purple-500/70",
+    },
+    study: {
+        icon: School,
+        color: "bg-yellow-500/70",
+    },
+    other: {
+        icon: Wallet,
+        color: "bg-neutral-500/70",
+    },
+} as const;
 
 export const GROUP_TYPES: GroupType[] = [
     { label: "Viaje", value: "trip" },
@@ -44,5 +76,5 @@ export const GROUP_TYPES: GroupType[] = [
     { label: "Pareja", value: "couple" },
     { label: "Fiesta", value: "party" },
     { label: "Estudio", value: "study" },
-    { label: "Otro", value: "other" },
+    { label: "General", value: "other" },
 ] as const;

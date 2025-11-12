@@ -41,7 +41,7 @@ export const InputWrapperController = <T extends FieldValues>({
             render={({ field }) => (
                 <FormControl isInvalid={!!error} isRequired={isRequired}>
                     <FormControlLabel>
-                        <FormControlLabelText className="text-indigo-950 text-lg font-semibold mb-1">
+                        <FormControlLabelText className="text-slate-900 text-lg font-semibold">
                             {label}
                         </FormControlLabelText>
                     </FormControlLabel>

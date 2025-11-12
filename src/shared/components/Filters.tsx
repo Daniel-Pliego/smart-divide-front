@@ -1,10 +1,8 @@
 import { HStack } from "@gluestack/hstack";
-import { Icon } from "@gluestack/icon";
 import { Input, InputField, InputIcon, InputSlot } from "@gluestack/input";
-import { Menu, MenuItem, MenuItemLabel } from "@gluestack/menu";
-import { SearchIcon, SlidersHorizontal } from "lucide-react-native";
+import { SearchIcon } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 
 export interface FilterOption<T> {
     label: string;
@@ -37,60 +35,44 @@ export const Filters = <T,>({
     }, [searchTerm, handleSearch]);
 
     const handleFilter = (value: T) => {
-        setSelectedFilter(value)
-        if (value === defaultFilter) {
-            handleSearch("");
-        }
-
+        setSelectedFilter(value);
         filterAction(value);
+        handleSearch(searchTerm);
     };
 
     return (
-        <HStack className="gap-2 items-center">
-            <Input className="bg-white border-0 h-10 rounded-full shadow-gray-200 elevation-sm flex-1">
-                <InputSlot className="pl-3 border-none">
-                    <InputIcon as={() => <SearchIcon color="#4f46e5" strokeWidth={1.5} />} />
+        <>
+            <Input className="bg-gray-100 border-0 h-12 rounded-lg">
+                <InputSlot className="pl-3">
+                    <InputIcon as={() => <SearchIcon color="#7e22ce" strokeWidth={1.5} />} />
                 </InputSlot>
                 <InputField
                     placeholder="Busca por el nombre del grupo..."
                     enterKeyHint="search"
-                    className="text-indigo-900"
+                    className="text-slate-900"
                     onChangeText={setSearchTerm}
                 />
             </Input>
 
-            <Menu
-                placement="bottom right"
-                offset={10}
-                trigger={({ ...triggerProps }) => {
-                    return (
-                        <Pressable {...triggerProps} className="bg-indigo-600 rounded-2xl p-2 px-3">
-                            <Icon as={SlidersHorizontal} className="text-white w-6 h-6" />
-                        </Pressable>
-                    );
-                }}
-                className="p-3"
-            >
+            <HStack className="gap-2 mt-4">
                 {filterOptions.map(({ label, value }) => (
-                    <MenuItem
-                        key={label}
-                        textValue={value as string}
-                        className={`${
-                            selectedFilter === value ? "bg-indigo-200" : ""
-                        } text-gray-950 p-2`}
-                        onPress={() => {handleFilter(value)}}
+                    <Pressable
+                        key={value as string}
+                        className={`p-1 px-4 ${
+                            selectedFilter === value ? "bg-purple-700" : "bg-gray-200"
+                        } rounded-full`}
+                        onPress={() => handleFilter(value)}
                     >
-                        <MenuItemLabel
-                            className={`text-base ${
-                                selectedFilter === value ? "text-gray-950" : "text-gray-500"
-                            } `}
-
+                        <Text
+                            className={`${
+                                selectedFilter === value ? "text-white" : "text-gray-700"
+                            }`}
                         >
                             {label}
-                        </MenuItemLabel>
-                    </MenuItem>
+                        </Text>
+                    </Pressable>
                 ))}
-            </Menu>
-        </HStack>
+            </HStack>
+        </>
     );
 };
