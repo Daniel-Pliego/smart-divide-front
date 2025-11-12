@@ -11,9 +11,9 @@ export const InputTextControlled = <T extends FieldValues>(props: InputProps<T>)
             {...props}
             InputComponent={({ value, onChange }) => (
                 <Input
-                    className={`bg-white ${
+                    className={`${
                         !error ? "border-0" : "border"
-                    }  h-auto py-2 px-2 rounded-2xl shadow-gray-200 elevation-sm`}
+                    }  h-auto py-3 px-2 bg-gray-100 rounded-lg shadow-gray-200 elevation-sm`}
                 >
                     <InputField
                         placeholder="Ej: Viaje a Cancún"

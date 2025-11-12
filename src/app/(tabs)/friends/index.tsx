@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export const Payment = () => {
+export default function Friends() {
     return (
         <View>
-            <Text>Pago</Text>
+            <Text>Friends</Text>
         </View>
     );
-};
+}

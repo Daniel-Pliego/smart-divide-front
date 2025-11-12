@@ -22,33 +22,37 @@ export const SelectControlled = <T extends FieldValues>(props: SelectProps<T>) =
         <InputWrapperController
             {...rest}
             error={error}
-            InputComponent={({ value, onChange }) => (
-                <Select selectedValue={value} onValueChange={onChange}>
-                    <SelectTrigger
-                        className={`bg-white rounded-2xl shadow-gray-200 elevation-sm h-auto px-2 py-3 justify-between ${
-                            error ? "border-red-500" : "border-0"
-                        }`}
-                    >
-                        <SelectInput
-                            placeholder="Selecciona un tipo"
-                            className="text-lg text-gray-950"
-                        />
-                        <SelectIcon as={ChevronDownIcon} />
-                    </SelectTrigger>
-                    <SelectPortal>
-                        <SelectBackdrop />
-                        <SelectContent>
-                            <SelectDragIndicatorWrapper>
-                                <SelectDragIndicator />
-                            </SelectDragIndicatorWrapper>
+            InputComponent={({ value, onChange }) => {
+                const selectedLabel = selectOptions.find((option) => option.value === value)?.label;
+                return (
+                    <Select selectedValue={value} onValueChange={onChange}>
+                        <SelectTrigger
+                            className={`bg-gray-100 rounded-lg shadow-gray-200 elevation-sm h-auto px-2 py-3 justify-between ${
+                                error ? "border-red-500" : "border-0"
+                            }`}
+                        >
+                            <SelectInput
+                                placeholder="Selecciona un tipo"
+                                className="text-lg text-slate-900"
+                                value={selectedLabel}
+                            />
+                            <SelectIcon as={ChevronDownIcon} />
+                        </SelectTrigger>
+                        <SelectPortal>
+                            <SelectBackdrop />
+                            <SelectContent>
+                                <SelectDragIndicatorWrapper>
+                                    <SelectDragIndicator />
+                                </SelectDragIndicatorWrapper>
 
-                            {selectOptions.map(({ label, value }) => (
-                                <SelectItem key={value} label={label} value={value as string} />
-                            ))}
-                        </SelectContent>
-                    </SelectPortal>
-                </Select>
-            )}
+                                {selectOptions.map(({ label, value }) => (
+                                    <SelectItem key={value} label={label} value={value as string} />
+                                ))}
+                            </SelectContent>
+                        </SelectPortal>
+                    </Select>
+                );
+            }}
         />
     );
 };

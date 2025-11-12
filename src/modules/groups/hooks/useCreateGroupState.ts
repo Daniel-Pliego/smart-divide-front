@@ -12,7 +12,7 @@ export const useCreateGroupState = () => {
         saveGroup(group);
         showToast("¡Grupo creado exitosamente!", "success");
         setTimeout(() => {
-            router.push("/(pages)/group");
+            router.navigate("/(tabs)/group");
         }, 2000);
     };
 

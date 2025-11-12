@@ -11,9 +11,9 @@ export const TextAreaControlled = <T extends FieldValues>(props: InputProps<T>) 
             {...props}
             InputComponent={({ value, onBlur, onChange }) => (
                 <Textarea
-                    className={`bg-white ${
+                    className={`${
                         !error ? "border-0" : "border"
-                    } p-2 300 rounded-2xl shadow-gray-200 shadow-sm`}
+                    } p-2 300 bg-gray-100 rounded-lg shadow-gray-200 elevation-sm`}
                     onBlur={onBlur}
                 >
                     <TextareaInput
