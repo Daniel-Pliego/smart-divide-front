@@ -1,8 +1,6 @@
-import { GroupForm } from "@/modules/groups/components";
-import { useCreateGroupState } from "@/modules/groups/hooks";
+import { CreateGroupScreen } from "@/features/groups/manage/ui";
 
-export default function GroupPage() {
-    const { saveGroup: onSubmit, ...formState } = useCreateGroupState();
+export default function CreateGroup() {
 
-    return <GroupForm {...formState} onSubmit={onSubmit} />;
+    return <CreateGroupScreen />;
 }
