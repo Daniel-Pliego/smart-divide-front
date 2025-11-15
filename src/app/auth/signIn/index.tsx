@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export const Signin = () => {
+export default function Signin() {
     return (
         <View>
             <Text>Iniciar Sesión</Text>
         </View>
     );
-};
+}
