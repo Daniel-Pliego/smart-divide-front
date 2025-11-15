@@ -7,25 +7,27 @@ import { VStack } from "@/lib/gluestack-ui/ui/vstack";
 import { UserBalance } from "@/modules/groups/components";
 import { GROUPS_FILTER_OPTIONS, ICON_BY_GROUP_TYPE } from "@/modules/groups/constants";
 import { useGroupsState } from "@/modules/groups/hooks";
-import { Filters } from "@/shared/components";
+import { Filters, ScreenLayout } from "@/shared/components";
 import { toMoney } from "@/shared/utils";
 import { Link } from "expo-router";
 import { ChevronRight, Plus } from "lucide-react-native";
 import React from "react";
-import { Pressable, ScrollView } from "react-native";
+import { Pressable } from "react-native";
 
 export default function GroupList() {
     const { userBalance, handleFilter, groupListItems, handleSearch } = useGroupsState();
     return (
-        <ScrollView className="flex-1 bg-white">
-            <Box className="bg-purple-700 pb-7 px-5">
-                <Text className="text-3xl text-white">Hola Diana Carolina</Text>
-                <Text className="text-base text-white mt-1">¡Bienvenida a Smart Divde!</Text>
+        <ScreenLayout
+            header={
+                <Box className="bg-purple-700 pb-7 px-5">
+                    <Text className="text-3xl text-white">Hola Diana Carolina</Text>
+                    <Text className="text-base text-white mt-1">¡Bienvenida a Smart Divde!</Text>
 
-                <UserBalance {...userBalance} />
-            </Box>
-
-            <Box className="mt-7 mx-5">
+                    <UserBalance {...userBalance} />
+                </Box>
+            }
+        >
+            <Box className="mt-7">
                 <HStack className="justify-between items-center mb-3">
                     <Text className="text-xl font-semibold text-slate-900">Revisa tus grupos</Text>
                     <Link href="/sections/group/create" asChild>
@@ -47,7 +49,7 @@ export default function GroupList() {
                         const groupIconType =
                             ICON_BY_GROUP_TYPE[type as keyof typeof ICON_BY_GROUP_TYPE];
                         return (
-                            <Link href="/" asChild key={id}>
+                            <Link href={`/(tabs)/group/${id}`} asChild key={id}>
                                 <Pressable className=" bg-gray-100 rounded-md p-5 shadow-lg">
                                     <HStack className="justify-between items-center">
                                         <HStack className="items-center gap-5">
@@ -93,6 +95,6 @@ export default function GroupList() {
                     })}
                 </VStack>
             </Box>
-        </ScrollView>
+        </ScreenLayout>
     );
 }
