@@ -6,11 +6,11 @@ export default function RootLayout() {
             screenOptions={{
                 statusBarStyle: "dark",
                 contentStyle: { backgroundColor: "#fff" },
-                headerShadowVisible: false
+                headerShadowVisible: false,
             }}
         >
             <Stack.Screen
-                name="group/create/index"
+                name="group/create"
                 options={{
                     headerTitleAlign: "center",
                     title: "¡Crea tu grupo!",

@@ -11,17 +11,15 @@ import {
 } from "@/shared/components/form";
 import { Button, ButtonText } from "@gluestack/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Router } from "expo-router";
 import { useForm } from "react-hook-form";
 
 export interface GroupFormProps {
     mode: "create" | "edit" | string;
     defaultValues?: GroupFormData;
     onSubmit: (group: GroupFormData) => void;
-    router: Router;
 }
 
-export const GroupForm = ({ mode, defaultValues, onSubmit, router }: GroupFormProps) => {
+export const GroupForm = ({ mode, defaultValues, onSubmit }: GroupFormProps) => {
     const {
         control,
         handleSubmit,

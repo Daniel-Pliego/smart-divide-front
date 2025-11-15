@@ -1,15 +1,15 @@
 import {
-  Briefcase,
-  Heart,
-  Home,
-  LucideIcon,
-  PartyPopper,
-  Plane,
-  School,
-  ShoppingBag,
-  Users,
-  Utensils,
-  Wallet,
+    Briefcase,
+    Heart,
+    Home,
+    LucideIcon,
+    PartyPopper,
+    Plane,
+    School,
+    ShoppingBag,
+    Users,
+    Utensils,
+    Wallet,
 } from "lucide-react-native";
 
 export interface GroupIconType {

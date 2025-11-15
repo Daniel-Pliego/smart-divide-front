@@ -17,7 +17,7 @@ export const useCreateGroupState = () => {
     };
 
     return {
-        onSubmit,
+        saveGroup: onSubmit,
         router,
         mode: "create",
     };

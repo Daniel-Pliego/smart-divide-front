@@ -1,0 +1,143 @@
+import { Box } from "@/lib/gluestack-ui/ui/box";
+import { Fab, FabIcon, FabLabel } from "@/lib/gluestack-ui/ui/fab";
+import { HStack } from "@/lib/gluestack-ui/ui/hstack";
+import { AddIcon, Icon } from "@/lib/gluestack-ui/ui/icon";
+import { VStack } from "@/lib/gluestack-ui/ui/vstack";
+import { AccordionUserBalance } from "@/modules/groups/components";
+import { HistoryList } from "@/modules/groups/components/HistoryList";
+import { ICON_BY_GROUP_TYPE } from "@/modules/groups/constants";
+import { useGetGroupDetails } from "@/modules/groups/hooks";
+import { ScreenLayout } from "@/shared/components";
+import { toMoney } from "@/shared/utils";
+import { Link, Stack, useLocalSearchParams } from "expo-router";
+import { Bolt } from "lucide-react-native";
+import { Pressable, Text } from "react-native";
+
+export default function Group() {
+    const { groupId } = useLocalSearchParams();
+    const { groupDetail, totalBalance, userBalance, history } = useGetGroupDetails(
+        groupId as string
+    );
+    const groupIconType = ICON_BY_GROUP_TYPE[groupDetail.type as keyof typeof ICON_BY_GROUP_TYPE];
+
+    return (
+        <>
+            <Stack.Screen
+                options={{
+                    title: "",
+                    headerStyle: {
+                        backgroundColor: "#7e22ce",
+                    },
+                    headerShadowVisible: false,
+                    headerRight: () => <Icon as={Bolt} className="w-7 h-7 text-white" />,
+                    headerTintColor: "#fff",
+                }}
+            />
+            <ScreenLayout
+                header={
+                    <>
+                        <Box className="bg-purple-700 h-16 relative">
+                            <Box className="bg-white p-[2px] rounded-2xl absolute left-5 -bottom-9">
+                                <Box
+                                    className={`p-2 ${groupIconType.color} w-20 h-20 rounded-2xl justify-center items-center border-2 border-white`}
+                                >
+                                    <Icon
+                                        as={groupIconType?.icon}
+                                        className="text-white w-12 h-12"
+                                    />
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box className="mt-10 px-5">
+                            <Text className="text-2xl font-semibold text-slate-900">
+                                {groupDetail.name}
+                            </Text>
+                            {groupDetail.description && (
+                                <Text
+                                    numberOfLines={2}
+                                    ellipsizeMode="tail"
+                                    className="text-slate-700"
+                                >
+                                    {groupDetail.description}
+                                </Text>
+                            )}
+
+                            <Box className="mt-5">
+                                <AccordionUserBalance
+                                    title={
+                                        <HStack className="gap-2">
+                                            <Text className="text-xl font-medium">Balance </Text>
+                                            <Text className="text-xl font-medium">
+                                                {toMoney(totalBalance)}
+                                            </Text>
+                                        </HStack>
+                                    }
+                                    content={
+                                        <VStack>
+                                            {totalBalance === 0 && (
+                                                <Text className="text-slate-700">
+                                                    No cuentas con saldos pendientes
+                                                </Text>
+                                            )}
+                                            {totalBalance !== 0 &&
+                                                userBalance.map(({ id, name, balance }) => (
+                                                    <Box key={id}>
+                                                        {balance > 0 && (
+                                                            <Text>
+                                                                {name} te debe{" "}
+                                                                <Text className="font-medium text-teal-700">
+                                                                    {toMoney(balance)}
+                                                                </Text>
+                                                            </Text>
+                                                        )}
+                                                        {balance < 0 && (
+                                                            <Text>
+                                                                A {name} le debes{" "}
+                                                                <Text className="font-medium text-orange-700">
+                                                                    {toMoney(Math.abs(balance))}
+                                                                </Text>
+                                                            </Text>
+                                                        )}
+                                                    </Box>
+                                                ))}
+                                        </VStack>
+                                    }
+                                />
+                            </Box>
+                        </Box>
+                    </>
+                }
+            >
+                <HStack className="gap-4 mt-4">
+                    <Link href="/" asChild>
+                        <Pressable
+                            disabled={!totalBalance}
+                            className="p-2 bg-purple-700 rounded-md shadow-lg disabled:bg-gray-400"
+                        >
+                            <Text className="text-white font-medium">Liquidar deuda</Text>
+                        </Pressable>
+                    </Link>
+                    <Link href="/">
+                        <Pressable className="p-2 bg-purple-700 rounded-md shadow-lg">
+                            <Text className="text-white font-medium">Saldos</Text>
+                        </Pressable>
+                    </Link>
+                </HStack>
+
+                {Object.entries(history).map(([date, items]) => (
+                    <HistoryList key={date} date={date} items={items} />
+                ))}
+            </ScreenLayout>
+            <Fab
+                placement="bottom right"
+                isHovered={false}
+                isDisabled={false}
+                isPressed={false}
+                className="absolute bottom-5 right-5 bg-purple-700"
+            >
+                <FabIcon as={AddIcon} size="xl" />
+                <FabLabel className="font-medium">Agregar gasto</FabLabel>
+            </Fab>
+        </>
+    );
+}

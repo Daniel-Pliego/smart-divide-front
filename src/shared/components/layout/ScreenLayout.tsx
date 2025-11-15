@@ -1,4 +1,5 @@
 import { Box } from "@/lib/gluestack-ui/ui/box";
+import { ScrollView } from "react-native";
 
 interface ScreenLayoutProps {
     children: React.ReactNode;
@@ -7,9 +8,9 @@ interface ScreenLayoutProps {
 
 export const ScreenLayout = ({ children, header }: ScreenLayoutProps) => {
     return (
-        <>
+        <ScrollView>
             {header || null}
-            <Box className="mx-5">{children}</Box>
-        </>
+            <Box className="mx-5 mb-10">{children}</Box>
+        </ScrollView>
     );
 };

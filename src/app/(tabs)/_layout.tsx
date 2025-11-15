@@ -1,7 +1,6 @@
-import { HeaderStatusBar } from "@/shared/components";
 import { Tabs } from "expo-router";
 import { CircleUserRound, ContactRound, UsersRound } from "lucide-react-native";
-import { Platform, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 export default function TabsLayout() {
     return (
@@ -9,22 +8,18 @@ export default function TabsLayout() {
             screenOptions={{
                 headerShown: false,
                 tabBarStyle: styles.tabBar,
-                tabBarActiveTintColor: "#fff",
-                tabBarInactiveTintColor: "#d8b4fe",
+                tabBarActiveTintColor: "#7e22ce",
+                tabBarInactiveTintColor: "#6b7280",
                 tabBarItemStyle: {
                     paddingVertical: 5,
                 },
             }}
         >
             <Tabs.Screen
-                name="group/index"
+                name="group"
                 options={{
                     title: "Grupos",
                     tabBarIcon: ({ color }) => <UsersRound color={color} size={24} />,
-                    headerShown: true,
-                    header: () => (
-                        <HeaderStatusBar bgColor="#7e22ce" statusBarStyle="light-content" />
-                    ),
                 }}
             />
             <Tabs.Screen
@@ -48,18 +43,12 @@ export default function TabsLayout() {
 
 const styles = StyleSheet.create({
     tabBar: {
-        position: "absolute",
-        bottom: Platform.OS === "ios" ? 15 : 15,
-        backgroundColor: "#7e22ce",
-        borderRadius: 40,
-        borderTopWidth: 0,
+        backgroundColor: "#fff",
         elevation: 5,
         shadowColor: "#000",
         shadowOpacity: 0.15,
         shadowRadius: 6,
         shadowOffset: { width: 0, height: 3 },
-        marginHorizontal: 30,
-        marginBottom: 10,
         height: 65,
     },
 });
