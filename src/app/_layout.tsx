@@ -1,3 +1,4 @@
+import { AuthValidator } from "@/features/auth/utils/AuthValidator";
 import { GluestackUIProvider } from "@gluestack/gluestack-ui-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
@@ -11,6 +12,7 @@ export default function RootLayout() {
         <SafeAreaProvider>
             <GluestackUIProvider>
                 <QueryClientProvider client={queryClient}>
+                    <AuthValidator />
                     <Stack
                         screenOptions={{
                             headerShown: false,
