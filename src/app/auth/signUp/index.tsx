@@ -1,9 +1,7 @@
-import { Text, View } from "react-native";
+import SignUpScreen from "@/features/auth/ui/SignUpScreen";
 
 export default function Signup() {
     return (
-        <View>
-            <Text>Crear cuenta</Text>
-        </View>
+        <SignUpScreen />
     );
 }
