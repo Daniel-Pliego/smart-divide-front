@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import SignInScreen from "@/features/auth/ui/SignInScreen";
 
 export default function Signin() {
-    return (
-        <View>
-            <Text>Iniciar Sesión</Text>
-        </View>
-    );
+    return <SignInScreen />;
 }

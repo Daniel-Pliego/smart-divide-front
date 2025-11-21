@@ -1,6 +1,7 @@
 import { Control, FieldError, FieldValues, Path } from "react-hook-form";
+import { TextInputProps } from "react-native";
 
-export interface InputProps<T extends FieldValues> {
+export interface InputProps<T extends FieldValues> extends TextInputProps {
     control: Control<T>;
     name: Path<T>;
     label: string;

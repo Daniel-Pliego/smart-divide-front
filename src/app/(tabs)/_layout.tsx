@@ -16,7 +16,7 @@ export default function TabsLayout() {
             }}
         >
             <Tabs.Screen
-                name="group"
+                name="(group)"
                 options={{
                     title: "Grupos",
                     tabBarIcon: ({ color }) => <UsersRound color={color} size={24} />,
