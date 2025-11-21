@@ -4,41 +4,31 @@ import { Fab, FabIcon, FabLabel } from "@/lib/gluestack-ui/ui/fab";
 import { HStack } from "@/lib/gluestack-ui/ui/hstack";
 import { AddIcon, Icon } from "@/lib/gluestack-ui/ui/icon";
 import { VStack } from "@/lib/gluestack-ui/ui/vstack";
-import { ScreenLayout } from "@/shared/components";
+import { EmptyState, ScreenLayout } from "@/shared/components";
 import { toMoney } from "@/shared/utils";
-import { Link, Stack, useLocalSearchParams } from "expo-router";
-import { Bolt } from "lucide-react-native";
+import WithouExpenses from "@assets/without-expenses.svg";
+import { Link, useLocalSearchParams } from "expo-router";
 import { Pressable, Text } from "react-native";
 import { useGetGroupDetails } from "../hooks";
 import { AccordionUserBalance, HistoryList } from "./components";
 
 export default function GroupDetailsScreen() {
     const { groupId } = useLocalSearchParams();
-    const { groupDetail, totalBalance, userBalance, history } = useGetGroupDetails(
+    const { groupDetail, totalBalance, userBalance, history, hasTransactions } = useGetGroupDetails(
         groupId as string
     );
+
     const groupIconType = ICON_BY_GROUP_TYPE[groupDetail.type as keyof typeof ICON_BY_GROUP_TYPE];
 
     return (
         <>
-            <Stack.Screen
-                options={{
-                    title: "",
-                    headerStyle: {
-                        backgroundColor: "#7e22ce",
-                    },
-                    headerShadowVisible: false,
-                    headerRight: () => <Icon as={Bolt} className="w-7 h-7 text-white" />,
-                    headerTintColor: "#fff",
-                }}
-            />
             <ScreenLayout
                 header={
                     <>
                         <Box className="bg-purple-700 h-16 relative">
                             <Box className="bg-white p-[2px] rounded-2xl absolute left-5 -bottom-9">
                                 <Box
-                                    className={`p-2 ${groupIconType.color} w-20 h-20 rounded-2xl justify-center items-center border-2 border-white`}
+                                    className={`p-2 ${groupIconType?.color} w-20 h-20 rounded-2xl justify-center items-center border-2 border-white`}
                                 >
                                     <Icon
                                         as={groupIconType?.icon}
@@ -49,15 +39,15 @@ export default function GroupDetailsScreen() {
                         </Box>
                         <Box className="mt-10 px-5">
                             <Text className="text-2xl font-semibold text-slate-900">
-                                {groupDetail.name}
+                                {groupDetail?.name}
                             </Text>
-                            {groupDetail.description && (
+                            {groupDetail?.description && (
                                 <Text
                                     numberOfLines={2}
                                     ellipsizeMode="tail"
                                     className="text-slate-700"
                                 >
-                                    {groupDetail.description}
+                                    {groupDetail?.description}
                                 </Text>
                             )}
 
@@ -67,7 +57,7 @@ export default function GroupDetailsScreen() {
                                         <HStack className="gap-2">
                                             <Text className="text-xl font-medium">Balance </Text>
                                             <Text className="text-xl font-medium">
-                                                {toMoney(totalBalance)}
+                                                {toMoney(totalBalance || 0)}
                                             </Text>
                                         </HStack>
                                     }
@@ -79,7 +69,7 @@ export default function GroupDetailsScreen() {
                                                 </Text>
                                             )}
                                             {totalBalance !== 0 &&
-                                                userBalance.map(({ id, name, balance }) => (
+                                                userBalance?.map(({ id, name, balance }) => (
                                                     <Box key={id}>
                                                         {balance > 0 && (
                                                             <Text>
@@ -123,20 +113,30 @@ export default function GroupDetailsScreen() {
                     </Link>
                 </HStack>
 
+                <EmptyState
+                    show={!hasTransactions}
+                    url="/"
+                    buttonText="Registra tus gastos"
+                    title="¡Aún no registras tus gastos!"
+                    image={<WithouExpenses width={300} height={300}/>}
+                />
+
                 {Object.entries(history).map(([date, items]) => (
                     <HistoryList key={date} date={date} items={items} />
                 ))}
             </ScreenLayout>
-            <Fab
-                placement="bottom right"
-                isHovered={false}
-                isDisabled={false}
-                isPressed={false}
-                className="absolute bottom-5 right-5 bg-purple-700"
-            >
-                <FabIcon as={AddIcon} size="xl" />
-                <FabLabel className="font-medium">Agregar gasto</FabLabel>
-            </Fab>
+            {hasTransactions && (
+                <Fab
+                    placement="bottom right"
+                    isHovered={false}
+                    isDisabled={false}
+                    isPressed={false}
+                    className="absolute bottom-5 right-5 bg-purple-700"
+                >
+                    <FabIcon as={AddIcon} size="xl" />
+                    <FabLabel className="font-medium">Agregar gasto</FabLabel>
+                </Fab>
+            )}
         </>
     );
 }

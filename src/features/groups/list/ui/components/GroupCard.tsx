@@ -20,7 +20,7 @@ export const GroupCard = ({ groupInfoResume }: Props) => {
     const groupIconType = ICON_BY_GROUP_TYPE[type as keyof typeof ICON_BY_GROUP_TYPE];
 
     return (
-        <Link href={`/(tabs)/group/${id}`} asChild>
+        <Link href={`/(tabs)/(group)/${id}`} asChild>
             <Pressable className="bg-gray-100 rounded-md p-5 shadow-lg">
                 <HStack className="justify-between items-center">
                     <HStack className="items-center gap-5">

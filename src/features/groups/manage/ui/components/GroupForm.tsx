@@ -46,7 +46,14 @@ export const GroupForm = ({ mode, defaultValues, onSubmit }: GroupFormProps) => 
                 <Icon as={selectedGroupIconType?.icon} className="text-white w-12 h-12" />
             </Box>
 
-            <InputTextControlled control={control} error={errors.name} name="name" label="Nombre" />
+            <InputTextControlled
+                control={control}
+                error={errors.name}
+                name="name"
+                label="Nombre"
+                placeholder="Viaje a cancun"
+                isRequired
+            />
 
             <SelectControlled
                 control={control}
@@ -54,6 +61,7 @@ export const GroupForm = ({ mode, defaultValues, onSubmit }: GroupFormProps) => 
                 name="type"
                 selectOptions={GROUP_TYPES}
                 label="Tipo de grupo"
+                isRequired
             />
 
             <TextAreaControlled
@@ -61,6 +69,8 @@ export const GroupForm = ({ mode, defaultValues, onSubmit }: GroupFormProps) => 
                 error={errors.description}
                 name="description"
                 label="Descripción"
+                placeholder="Viaje a cancún"
+                isRequired
             />
 
             <Button
