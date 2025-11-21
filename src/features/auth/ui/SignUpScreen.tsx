@@ -2,12 +2,13 @@ import { Box } from "@/lib/gluestack-ui/ui/box";
 import { Button, ButtonText } from "@/lib/gluestack-ui/ui/button";
 import { VStack } from "@/lib/gluestack-ui/ui/vstack";
 import { FormError, InputTextControlled, InputTextSecretControlled } from "@/shared/components";
+import { FormLayout } from "@/shared/components/layout/FormLayout";
 import { useAppToast } from "@/shared/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 import { useSignUpState } from "../hooks";
 import { UserSignUpForm, userSignUpFormSchema } from "../types/UserSignUp";
 
@@ -40,7 +41,7 @@ export default function SignUpScreen() {
     const { handleSubmit: handleSignUpSubmit } = useSignUpState({ showToast });
 
     return (
-        <View className="flex-1 justify-center items-center">
+        <FormLayout boxClassName="flex-1 justify-center items-center">
             <VStack className="w-10/12 gap-5">
                 <Box>
                     <Text className="text-4xl text-purple-700 font-bold text-center uppercase">
@@ -109,6 +110,6 @@ export default function SignUpScreen() {
                     </Link>
                 </Box>
             </VStack>
-        </View>
+        </FormLayout>
     );
 }

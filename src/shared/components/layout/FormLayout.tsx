@@ -1,13 +1,14 @@
 import { Box } from "@/lib/gluestack-ui/ui/box";
-import { Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export const FormLayout = ({
     children,
     boxClassName,
+    extraScrollHeight = 0
 }: {
     children: React.ReactNode;
     boxClassName?: string;
+    extraScrollHeight?: number;
 }) => {
     return (
         <KeyboardAwareScrollView
@@ -18,7 +19,7 @@ export const FormLayout = ({
             }}
             enableOnAndroid={true}
             enableAutomaticScroll={true}
-            extraScrollHeight={Platform.OS === "ios" ? 50 : 210}
+            extraScrollHeight={extraScrollHeight}
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
         >

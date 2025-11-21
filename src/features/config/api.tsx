@@ -1,6 +1,6 @@
 import axios from "axios";
 import { navigate } from "expo-router/build/global-state/routing";
-import { getAuthToken } from "../auth/utils";
+import { getAuthToken, removeAuthToken } from "../auth/utils";
 import { API_URL } from "./enviroment";
 
 export const apiClient = axios.create({
@@ -23,10 +23,11 @@ apiClient.interceptors.request.use(async (config) => {
 
 apiClient.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
         const status = error?.response?.status;
 
         if (status === 401 || status === 403) {
+            await removeAuthToken();
             navigate("/auth/signIn");
         }
 

@@ -1,9 +1,8 @@
 import { AxiosError } from "axios";
-import { router } from "expo-router";
+import { useAuth } from "../context/AuthContext";
 import { useSignUpService } from "../services/useSignUpService";
 import { AuthWrappedResponse, UserSignUpForm } from "../types";
-import { mapSignUpFormToUserSignUp, setAuthToken } from "../utils";
-
+import { mapSignUpFormToUserSignUp } from "../utils";
 interface useSignInStateProps {
     showToast: (message: string, type: "success" | "error") => void;
 }
@@ -13,12 +12,11 @@ const messagesForStatus: Record<number, string> = {
 };
 
 export const useSignUpState = (props: useSignInStateProps) => {
+    const { login } = useAuth();
+
     const onSuccess = async ({ body }: AuthWrappedResponse) => {
         props.showToast("¡Su cuenta ha sido creada exitosamente!", "success");
-        await setAuthToken(body);
-        setTimeout(() => {
-            router.replace("/(tabs)/group");
-        }, 500);
+        await login(body);
     };
 
     const onError = (error: AxiosError) => {

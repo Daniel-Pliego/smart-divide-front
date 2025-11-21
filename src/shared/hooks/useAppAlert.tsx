@@ -32,16 +32,16 @@ export const useAppToast = () => {
                     nativeID={`toast-${id}`}
                     action={type}
                     variant="solid"
-                    className={`rounded-2xl shadow-lg px-4 py-3 w-11/12 bg-white border ${BG_COLORS[type]}`}
+                    className={`rounded-2xl shadow-lg px-4 py-3 w-10/12 bg-white border ${BG_COLORS[type]} self-center`}
                 >
                     <HStack className="items-center gap-2">
                         {ICONS[type]}
-                        <Box className="flex-1">
+                        <Box className="w-full">
                             {title && <ToastTitle className="text-slate-900">{title}</ToastTitle>}
                             <ToastDescription
                                 className={`${
                                     title ? "text-slate-700" : "text-slate-900 font-medium"
-                                }`}
+                                } w-11/12`}
                             >
                                 {message}
                             </ToastDescription>

@@ -1,32 +1,14 @@
 import { Redirect, SplashScreen, usePathname } from "expo-router";
-import { useEffect, useState } from "react";
-import { getAuthToken } from "./auth";
+import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
 
 const PUBLIC_PATHS = ["/auth/signIn", "/auth/signUp"];
 
 export const AuthValidator = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+    const { isLoading, isAuthenticated } = useAuth();
     const pathname = usePathname();
-
-    useEffect(() => {
-        const validateAuth = async () => {
-            const authToken = await getAuthToken();
-
-            if (authToken) {
-                setIsAuthenticated(true);
-            } else {
-                setIsAuthenticated(false);
-            }
-
-            setIsLoading(false);
-        };
-
-        validateAuth();
-    }, []);
 
     useEffect(() => {
         if (!isLoading) {

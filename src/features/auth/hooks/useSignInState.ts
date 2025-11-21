@@ -1,23 +1,21 @@
-import { router } from "expo-router";
+import { useAuth } from "../context/AuthContext";
 import { useSignInService } from "../services/useSignInService";
 import { AuthWrappedResponse, UserSignIn } from "../types";
-import { setAuthToken } from "../utils";
 
 interface useSignInStateProps {
     showToast: (message: string, type: "success" | "error") => void;
 }
 
-export const useSignInState = (props: useSignInStateProps) => {
+export const useSignInState = ({ showToast}: useSignInStateProps) => {
+    const { login } = useAuth();
+
     const onSuccess = async ({ body }: AuthWrappedResponse) => {
-        props.showToast("¡Inicio de sesión exitoso!", "success");
-        await setAuthToken(body);
-        setTimeout(() => {
-            router.replace("/(tabs)/group");
-        }, 500);
+        showToast("¡Inicio de sesión exitoso!", "success");
+        //await login(body);
     };
 
     const onError = () => {
-        props.showToast("Error al iniciar sesión. Por favor, verifica tus credenciales.", "error");
+        showToast("Error al iniciar sesión. Por favor, verifica tus credenciales.", "error");
     };
 
     const mutation = useSignInService({ onSuccess, onError });
