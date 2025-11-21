@@ -11,7 +11,7 @@ export const useSignInState = ({ showToast}: useSignInStateProps) => {
 
     const onSuccess = async ({ body }: AuthWrappedResponse) => {
         showToast("¡Inicio de sesión exitoso!", "success");
-        //await login(body);
+        await login(body);
     };
 
     const onError = () => {
