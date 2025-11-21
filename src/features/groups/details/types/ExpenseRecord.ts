@@ -5,7 +5,6 @@ export type ExpenseRecord = {
     amount: number;
     createdAt: string;
     payers: {
-        id: number;
         userId: string;
         name: string;
         lastName: string;

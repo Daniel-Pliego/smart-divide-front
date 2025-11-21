@@ -7,11 +7,11 @@ import React from "react";
 import { Text } from "react-native";
 import { ExpenseRecord } from "../../types";
 
-export const ExpenseItem = ({ expense }: { expense: ExpenseRecord }) => {
+export const ExpenseItem = ({ expense, userId }: { expense: ExpenseRecord, userId: string }) => {
     const expenseIconType = ICON_BY_EXPENSE_TYPE[expense.type as ExpenseIconKeyType];
 
     return (
-        <HStack key={expense.id + "expense"} className="gap-3 bg-gray-100 rounded-md p-5 shadow-lg">
+        <HStack className="gap-3 bg-gray-100 rounded-md p-5 shadow-lg">
             <HStack className="gap-3 flex-1">
                 <Box
                     className={`p-2 mt-1 w-12 h-12 items-center justify-center rounded-xl ${expenseIconType.color}`}
@@ -24,8 +24,8 @@ export const ExpenseItem = ({ expense }: { expense: ExpenseRecord }) => {
                         {expense.description}
                     </Text>
                     {expense.payers.map((payer) => (
-                        <Text key={payer.id} className="text-slate-700">
-                            {payer.name} pagó {toMoney(payer.amountPaid)}
+                        <Text key={payer.userId} className="text-slate-700">
+                            {payer.userId === userId ? "Pagaste" : `${payer.name} pagó`} <Text className="text-teal-700 font-medium">{toMoney(payer.amountPaid)}</Text>
                         </Text>
                     ))}
                 </Box>
@@ -37,15 +37,15 @@ export const ExpenseItem = ({ expense }: { expense: ExpenseRecord }) => {
                         <Text className="text-right text-orange-700 leading-none font-medium">
                             Debes
                         </Text>
-                        <Text className="text-right text-orange-700 text-lg">
-                            {toMoney(expense.userBalance)}
+                        <Text className="text-right text-orange-700 text-lg font-medium">
+                            {toMoney(Math.abs(expense.userBalance))}
                         </Text>
                     </>
                 )}
                 {expense.userBalance > 0 && (
                     <>
-                        <Text className="text-right text-teal-700 leading-none">Te deben</Text>
-                        <Text className="text-right text-teal-700">
+                        <Text className="text-right text-teal-700 leading-none font-medium">Te deben</Text>
+                        <Text className="text-right text-teal-700 font-medium">
                             {toMoney(expense.userBalance)}
                         </Text>
                     </>
