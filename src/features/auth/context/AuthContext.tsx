@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const validateAuth = async () => {
             try {
-                await removeAuthToken();
                 const authToken = await getAuthToken();
                 if (authToken) {
                     setIsAuthenticated(true);
