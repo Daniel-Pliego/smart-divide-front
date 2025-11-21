@@ -43,7 +43,7 @@ export default function GroupListScreen() {
                         </VStack>
                     )}
 
-                    {groupListItems.length === 0 && (
+                    {groupListItems.length === 0 && hasGroups&& (
                         <Text className="text-lg text-slate-900">
                             No se han encontrado resultados
                         </Text>
