@@ -1,26 +1,12 @@
 import { useAppToast } from "@/shared/hooks";
-import { useRouter } from "expo-router";
-import { useCreateGroup } from "../hooks";
+import { useCreateGroupState } from "../hooks";
 import GroupForm from "./components/GroupForm";
 
 export const CreateGroupScreen = () => {
-    const router = useRouter();
     const { showToast } = useAppToast();
-
-    const onSuccess = () => {
-         setTimeout(() => {
-            showToast("¡Grupo creado exitosamente!", "success");
-            router.navigate("/(tabs)/group");
-        }, 1000);
-    };
-
-    const onError = () => {};
-
-    const { saveGroup: onSubmit, ...formState } = useCreateGroup({
-        userId: "userId_1",
-        onSuccess,
-        onError,
+    const { handleSubmit, ...formState } = useCreateGroupState({
+        showToast,
     });
 
-    return <GroupForm {...formState} onSubmit={onSubmit} />;
+    return <GroupForm {...formState} onSubmit={handleSubmit} />;
 };

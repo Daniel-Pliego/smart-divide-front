@@ -5,7 +5,7 @@ import { InputWrapperController } from "./InputWrapperController";
 import { InputProps } from "./types";
 
 export const TextAreaControlled = <T extends FieldValues>(props: InputProps<T>) => {
-    const { error } = props;
+    const { error, ...rest } = props;
     return (
         <InputWrapperController
             {...props}
@@ -17,12 +17,12 @@ export const TextAreaControlled = <T extends FieldValues>(props: InputProps<T>) 
                     onBlur={onBlur}
                 >
                     <TextareaInput
-                        placeholder="Ej: Viaje a Cancún"
                         className="text-lg h-32"
                         value={value}
                         onChangeText={onChange}
                         multiline
                         numberOfLines={6}
+                        {...rest}
                     />
                 </Textarea>
             )}
