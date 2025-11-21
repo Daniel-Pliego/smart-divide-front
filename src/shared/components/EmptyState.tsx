@@ -19,7 +19,7 @@ export const EmptyState = ({ title, buttonText, url, image, show }: EmptyStatePr
 
     return (
         <VStack className="items-center justify-center mt-10">
-            <Text className="text-2xl text-purple-700 font-semibold">{title}</Text>
+            <Text className="text-2xl text-purple-700 font-semibold text-center mb-8">{title}</Text>
             {image}
             <Link href={url} asChild className="mt-10">
                 <Button className="border-purple-700" size="lg" variant="outline">
