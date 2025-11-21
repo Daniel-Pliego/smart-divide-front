@@ -1,3 +1,4 @@
+import { getAuthStore } from "@/features/auth/utils";
 import { Box } from "@/lib/gluestack-ui/ui/box";
 import { Fab, FabIcon, FabLabel } from "@/lib/gluestack-ui/ui/fab";
 import { HStack } from "@/lib/gluestack-ui/ui/hstack";
@@ -7,20 +8,31 @@ import { VStack } from "@/lib/gluestack-ui/ui/vstack";
 import { EmptyState, ScreenLayout } from "@/shared/components";
 import WithoutGroups from "@assets/without-groups.svg";
 import { Link } from "expo-router";
+import { useEffect, useState } from "react";
 import { useGetGroupList } from "../hooks";
 import { GroupCard, GroupFilterSection, UserBalance } from "./components";
 export default function GroupListScreen() {
     const { userBalance, handleFilter, groupListItems, handleSearch, hasGroups } =
         useGetGroupList();
 
+    const [userDetails, setUserDetails] = useState<string>();
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            const auth = await getAuthStore();
+            setUserDetails((auth?.name ?? "") + " " + (auth?.lastName ?? ""));
+        };
+        fetchUserDetails();
+    }, []);
+
     return (
         <>
             <ScreenLayout
                 header={
                     <Box className="bg-purple-700 pb-7 px-5 pt-5">
-                        <Text className="text-3xl text-white">Hola Diana Carolina</Text>
+                        <Text className="text-3xl text-white">Hola {userDetails}</Text>
                         <Text className="text-base text-white mt-1">
-                            ¡Bienvenida a Smart Divde!
+                            ¡Bienvenido a Smart Divde!
                         </Text>
 
                         <UserBalance {...userBalance} />
@@ -43,7 +55,7 @@ export default function GroupListScreen() {
                         </VStack>
                     )}
 
-                    {groupListItems.length === 0 && hasGroups&& (
+                    {groupListItems.length === 0 && hasGroups && (
                         <Text className="text-lg text-slate-900">
                             No se han encontrado resultados
                         </Text>
