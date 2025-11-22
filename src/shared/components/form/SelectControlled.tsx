@@ -32,9 +32,9 @@ export const SelectControlled = <T extends FieldValues>(props: SelectProps<T>) =
                             }`}
                         >
                             <SelectInput
-                                placeholder="Selecciona un tipo"
                                 className="text-lg text-slate-900"
                                 value={selectedLabel}
+                                {...rest}
                             />
                             <SelectIcon as={ChevronDownIcon} />
                         </SelectTrigger>

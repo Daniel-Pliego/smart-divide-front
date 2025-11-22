@@ -25,7 +25,7 @@ export const useGetGroupDetails = (groupId: string) => {
     const totalBalance = userBalance?.reduce((acc, curr) => acc + curr.balance, 0);
 
     const history = [...payments, ...expenses].sort(
-        (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
     const historyGroupedByDate = groupBy(history, (item) => formatDate(item.createdAt));

@@ -56,8 +56,8 @@ export default function GroupDetailsScreen() {
                                         <HStack className="gap-0">
                                             <Text className="text-xl font-medium">Revisa tu balance </Text>
                                             <Text className={`text-xl font-medium text-purple-700`}>
-                                                {totalBalance > 0 ? "+" : "-"}
-                                                {toMoney(Math.abs(totalBalance))}
+                                                {totalBalance > 0 ? "+" : ""}
+                                                {toMoney(totalBalance)}
                                             </Text>
                                         </HStack>
                                     }
