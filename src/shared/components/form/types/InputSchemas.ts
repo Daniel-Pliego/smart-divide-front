@@ -26,3 +26,5 @@ export const ImageFileSchema = z
             !file.mimeType || ["image/jpeg", "image/jpg", "image/png"].includes(file.mimeType),
         "Solo se permiten imágenes .jpg, .jpeg, o .png."
     );
+
+export type ImageFile = z.infer<typeof ImageFileSchema>;

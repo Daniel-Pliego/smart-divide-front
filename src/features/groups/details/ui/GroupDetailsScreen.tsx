@@ -69,8 +69,8 @@ export default function GroupDetailsScreen() {
                                                 </Text>
                                             )}
                                             {totalBalance !== 0 &&
-                                                userBalance?.map(({ id, name, balance }) => (
-                                                    <Box key={id + "balance"}>
+                                                userBalance?.map(({ userId, name, balance }) => (
+                                                    <Box key={userId + "balance"}>
                                                         {balance > 0 && (
                                                             <Text>
                                                                 {name} te debe{" "}

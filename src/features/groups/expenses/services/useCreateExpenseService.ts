@@ -5,8 +5,8 @@ import { AxiosError } from "axios";
 import { Expense } from "../types";
 
 interface useCreateExpenseServiceProps {
-    onSuccess: () => void;
-    onError?: (error: AxiosError) => void;
+    onSuccess: () => Promise<void>;
+    onError?: (error: AxiosError) => Promise<void>;
     groupId: string;
 }
 
