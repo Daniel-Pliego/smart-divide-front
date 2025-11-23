@@ -10,7 +10,6 @@ export type GroupDetails = {
     type: keyof GroupIconType;
 
     userBalance: {
-        id: number;
         userId: string;
         name: string;
         balance: number;

@@ -14,9 +14,8 @@ import { AccordionUserBalance, HistoryList } from "./components";
 
 export default function GroupDetailsScreen() {
     const { groupId } = useLocalSearchParams();
-    const { groupDetail, totalBalance, userBalance, history, hasTransactions } = useGetGroupDetails(
-        groupId as string
-    );
+    const { groupDetail, totalBalance, userBalance, history, hasTransactions, userId } =
+        useGetGroupDetails(groupId as string);
 
     const groupIconType = ICON_BY_GROUP_TYPE[groupDetail.type as keyof typeof ICON_BY_GROUP_TYPE];
 
@@ -54,10 +53,11 @@ export default function GroupDetailsScreen() {
                             <Box className="mt-5">
                                 <AccordionUserBalance
                                     title={
-                                        <HStack className="gap-2">
-                                            <Text className="text-xl font-medium">Balance </Text>
-                                            <Text className="text-xl font-medium">
-                                                {toMoney(totalBalance || 0)}
+                                        <HStack className="gap-0">
+                                            <Text className="text-xl font-medium">Revisa tu balance </Text>
+                                            <Text className={`text-xl font-medium text-purple-700`}>
+                                                {totalBalance > 0 ? "+" : ""}
+                                                {toMoney(totalBalance)}
                                             </Text>
                                         </HStack>
                                     }
@@ -69,8 +69,8 @@ export default function GroupDetailsScreen() {
                                                 </Text>
                                             )}
                                             {totalBalance !== 0 &&
-                                                userBalance?.map(({ id, name, balance }) => (
-                                                    <Box key={id}>
+                                                userBalance?.map(({ userId, name, balance }) => (
+                                                    <Box key={userId + "balance"}>
                                                         {balance > 0 && (
                                                             <Text>
                                                                 {name} te debe{" "}
@@ -118,24 +118,26 @@ export default function GroupDetailsScreen() {
                     url="/"
                     buttonText="Registra tus gastos"
                     title="¡Aún no registras tus gastos!"
-                    image={<WithouExpenses width={300} height={300}/>}
+                    image={<WithouExpenses width={300} height={300} />}
                 />
 
                 {Object.entries(history).map(([date, items]) => (
-                    <HistoryList key={date} date={date} items={items} />
+                    <HistoryList key={date} date={date} items={items} userId={userId} />
                 ))}
             </ScreenLayout>
             {hasTransactions && (
-                <Fab
-                    placement="bottom right"
-                    isHovered={false}
-                    isDisabled={false}
-                    isPressed={false}
-                    className="absolute bottom-5 right-5 bg-purple-700"
-                >
-                    <FabIcon as={AddIcon} size="xl" />
-                    <FabLabel className="font-medium">Agregar gasto</FabLabel>
-                </Fab>
+                <Link href={`/sections/group/${groupId}/create-expense`} asChild>
+                    <Fab
+                        placement="bottom right"
+                        isHovered={false}
+                        isDisabled={false}
+                        isPressed={false}
+                        className="absolute bottom-5 right-5 bg-purple-700"
+                    >
+                        <FabIcon as={AddIcon} size="xl" />
+                        <FabLabel className="font-medium">Agregar gasto</FabLabel>
+                    </Fab>
+                </Link>
             )}
         </>
     );

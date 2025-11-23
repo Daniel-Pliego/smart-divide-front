@@ -16,6 +16,13 @@ export default function RootLayout() {
                     title: "¡Crea tu grupo!",
                 }}
             />
+            <Stack.Screen
+                name="group/[groupId]/create-expense"
+                options={{
+                    headerTitleAlign: "center",
+                    headerTitle: "Registrar gasto",
+                }}
+            />
         </Stack>
     );
 }

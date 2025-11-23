@@ -13,7 +13,7 @@ export const UserBalance = ({ totalCredits, totalDebts }: UserBalanceProps) => {
     const totalBalance = totalCredits - totalDebts;
     return (
         <HStack className="mt-7 bg-white rounded-xl p-5 items-center justify-between">
-            {totalBalance > 0 && (
+            {totalBalance !== 0 && (
                 <>
                     <Box>
                         <Text className="font-medium text-slate-900">Tu balance general</Text>
@@ -32,7 +32,7 @@ export const UserBalance = ({ totalCredits, totalDebts }: UserBalanceProps) => {
                 </>
             )}
 
-            {totalBalance <= 0 && (
+            {totalBalance == 0 && (
                 <>
                     <Text className="font-medium text-slate-900">Sin saldos pendientes</Text>
                 </>

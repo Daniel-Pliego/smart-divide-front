@@ -4,9 +4,8 @@ import { TextInputProps } from "react-native";
 export interface InputProps<T extends FieldValues> extends TextInputProps {
     control: Control<T>;
     name: Path<T>;
-    label: string;
+    label?: string;
     error?: FieldError;
-    isRequired?: boolean;
 }
 
 export interface SelectProps<T extends FieldValues> extends InputProps<T> {

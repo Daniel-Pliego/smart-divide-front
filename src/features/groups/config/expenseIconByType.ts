@@ -101,5 +101,5 @@ export const EXPENSE_TYPES: ExpenseType[] = [
     { label: "Trabajo", value: "work" },
     { label: "Cuidado personal", value: "personalCare" },
     { label: "Fitness", value: "fitness" },
-    { label: "Otro", value: "other" },
+    { label: "General", value: "other" },
 ] as const;

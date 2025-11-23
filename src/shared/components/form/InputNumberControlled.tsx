@@ -4,7 +4,7 @@ import { FieldValues } from "react-hook-form";
 import { InputWrapperController } from "./InputWrapperController";
 import { InputProps } from "./types";
 
-export const InputTextControlled = <T extends FieldValues>(props: InputProps<T>) => {
+export const InputNumberControlled = <T extends FieldValues>(props: InputProps<T>) => {
     const { error, ...rest } = props;
     return (
         <InputWrapperController
@@ -19,7 +19,20 @@ export const InputTextControlled = <T extends FieldValues>(props: InputProps<T>)
                     <InputField
                         className="text-lg"
                         value={value}
-                        onChangeText={onChange}
+                        onChangeText={(value) => {
+                            const cleaned = value.replace(/[^\d.]/g, "");
+                            const hasDot = cleaned.endsWith(".");
+                            const [int = "", dec = ""] = cleaned.split(".");
+
+                            const normalizedInt = int.replace(/^0+(?=\d)/, "") || int;
+                            const trimmedDec = dec.slice(0, 2);
+
+                            let output = normalizedInt;
+                            if (trimmedDec) output += `.${trimmedDec}`;
+                            else if (hasDot) output += ".";
+
+                            onChange(output);
+                        }}
                         {...rest}
                     />
                 </Input>
