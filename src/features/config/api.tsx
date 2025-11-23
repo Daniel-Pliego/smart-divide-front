@@ -1,6 +1,5 @@
 import axios from "axios";
-import { navigate } from "expo-router/build/global-state/routing";
-import { getAuthToken, removeAuthToken } from "../auth/utils";
+import { getAuthToken, getCachedAuthToken, notifyUnauthorized } from "../auth/utils";
 import { API_URL } from "./enviroment";
 
 export const apiClient = axios.create({
@@ -12,7 +11,11 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use(async (config) => {
-    const authToken = await getAuthToken();
+    let authToken = getCachedAuthToken();
+
+    if (!authToken) {
+        authToken = await getAuthToken();
+    }
 
     if (authToken) {
         config.headers.Authorization = `Bearer ${authToken}`;
@@ -27,8 +30,7 @@ apiClient.interceptors.response.use(
         const status = error?.response?.status;
 
         if (status === 401 || status === 403) {
-            await removeAuthToken();
-            navigate("/auth/signIn");
+            await notifyUnauthorized();
         }
 
         return Promise.reject(error);
