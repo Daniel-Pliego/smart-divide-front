@@ -44,6 +44,17 @@ export const ExpenseFormSchema = z
                 path: ["participants", "_sum"],
             });
         }
+
+        const payerIds = new Set(data.payers.map(p => p.userId));
+        const hasOtherParticipants = data.participants.some(p => !payerIds.has(p.userId));
+
+        if (!hasOtherParticipants) {
+            ctx.addIssue({
+                code: "custom",
+                message: "Debe haber al menos un participante diferente a quienes pagaron el gasto",
+                path: ["participants", "_sum"],
+            });
+        }
     });
 
 export type ExpenseForm = z.infer<typeof ExpenseFormSchema>;

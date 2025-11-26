@@ -54,7 +54,9 @@ export default function GroupDetailsScreen() {
                                 <AccordionUserBalance
                                     title={
                                         <HStack className="gap-0">
-                                            <Text className="text-xl font-medium">Revisa tu balance </Text>
+                                            <Text className="text-xl font-medium">
+                                                Revisa tu balance{" "}
+                                            </Text>
                                             <Text className={`text-xl font-medium text-purple-700`}>
                                                 {totalBalance > 0 ? "+" : ""}
                                                 {toMoney(totalBalance)}
@@ -122,11 +124,17 @@ export default function GroupDetailsScreen() {
                 />
 
                 {Object.entries(history).map(([date, items]) => (
-                    <HistoryList key={date} date={date} items={items} userId={userId} />
+                    <HistoryList
+                        key={date}
+                        date={date}
+                        items={items}
+                        userId={userId}
+                        groupId={groupId as string}
+                    />
                 ))}
             </ScreenLayout>
             {hasTransactions && (
-                <Link href={`/sections/group/${groupId}/create-expense`} asChild>
+                <Link href={`/sections/group/${groupId}/expense`} asChild>
                     <Fab
                         placement="bottom right"
                         isHovered={false}

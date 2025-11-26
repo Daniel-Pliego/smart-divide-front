@@ -8,9 +8,10 @@ interface HistoryListProps {
     date: string;
     items: (ExpenseRecord | PaymentRecord)[];
     userId: string;
+    groupId: string; 
 }
 
-export const HistoryList = ({ date, items, userId }: HistoryListProps) => {
+export const HistoryList = ({ date, items, userId, groupId }: HistoryListProps) => {
     return (
         <>
             <Text className="mb-2 mt-5 text-lg">{date}</Text>
@@ -19,7 +20,7 @@ export const HistoryList = ({ date, items, userId }: HistoryListProps) => {
                     "fromUser" in item ? (
                         <PaymentItem key={item.id + "payment"} payment={item} />
                     ) : (
-                        <ExpenseItem key={item.id + "expense"} expense={item} userId={userId} />
+                        <ExpenseItem key={item.id + "expense"} expense={item} userId={userId} groupId={groupId} />
                     )
                 )}
             </VStack>
