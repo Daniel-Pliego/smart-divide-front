@@ -10,7 +10,7 @@ export const useCreateGroupState = ({ showToast }: useCreateGroupStateProps) => 
     const onSuccess = () => {
         showToast("¡Grupo creado exitosamente!", "success");
         setTimeout(() => {
-            router.replace("/(tabs)/(group)");
+            router.back();
         }, 500);
     };
 

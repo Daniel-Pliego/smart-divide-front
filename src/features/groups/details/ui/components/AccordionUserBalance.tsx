@@ -14,11 +14,16 @@ import { ChevronRightIcon } from "lucide-react-native";
 interface AccordionUserBalanceProps {
     title: string | React.ReactNode;
     content: string | React.ReactNode;
+    isDefaultExpanded?: boolean;
 }
 
-export const AccordionUserBalance = ({ title, content }: AccordionUserBalanceProps) => {
+export const AccordionUserBalance = ({
+    title,
+    content,
+    isDefaultExpanded,
+}: AccordionUserBalanceProps) => {
     return (
-        <Accordion type="multiple">
+        <Accordion type="multiple" defaultValue={isDefaultExpanded ? ["a"] : []}>
             <AccordionItem value="a">
                 <AccordionHeader>
                     <AccordionTrigger className="p-0">

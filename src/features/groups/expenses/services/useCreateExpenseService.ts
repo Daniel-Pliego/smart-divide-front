@@ -20,7 +20,7 @@ export const useCreateExpenseService = ({
     return useMutation({
         mutationFn: async (data: Expense) => {
             const auth = await getAuthStore();
-            return await apiClient.post(`user/${auth?.userId}/group/${groupId}/expense`, data);
+            return await apiClient.post(`user/${auth?.userId}/groups/${groupId}/expense`, data);
         },
         onSuccess: () => {
             onSuccess();

@@ -17,10 +17,22 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
-                name="group/[groupId]/create-expense"
+                name="group/[groupId]/expense/index"
                 options={{
                     headerTitleAlign: "center",
                     headerTitle: "Registrar gasto",
+                }}
+            />
+            <Stack.Screen
+                name="group/[groupId]/expense/[expenseId]"
+                options={{
+                    title: "",
+                    statusBarStyle: "light",
+                    headerStyle: {
+                        backgroundColor: "#7e22ce",
+                    },
+                    headerShadowVisible: false,
+                    headerTintColor: "#fff",
                 }}
             />
         </Stack>
