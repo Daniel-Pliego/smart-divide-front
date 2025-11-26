@@ -117,7 +117,7 @@ export default function GroupDetailsScreen() {
 
                 <EmptyState
                     show={!hasTransactions}
-                    url="/"
+                    url={`/sections/group/${groupId}/expense`}
                     buttonText="Registra tus gastos"
                     title="¡Aún no registras tus gastos!"
                     image={<WithouExpenses width={300} height={300} />}
