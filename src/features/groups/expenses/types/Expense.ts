@@ -45,16 +45,27 @@ export const ExpenseFormSchema = z
             });
         }
 
-        const payerIds = new Set(data.payers.map(p => p.userId));
-        const hasOtherParticipants = data.participants.some(p => !payerIds.has(p.userId));
+        const balances = new Map<string, number>();
 
-        if (!hasOtherParticipants) {
+        data.payers.forEach(p => {
+            balances.set(p.userId, (balances.get(p.userId) || 0) + Number(p.amountPaid));
+        });
+
+        data.participants.forEach(p => {
+            balances.set(p.userId, (balances.get(p.userId) || 0) - Number(p.amountPaid));
+        });
+
+        const everyoneHasZeroBalance = Array.from(balances.values()).every(balance => Math.abs(balance) < 0.001);
+
+        if (everyoneHasZeroBalance) {
             ctx.addIssue({
                 code: "custom",
-                message: "Debe haber al menos un participante diferente a quienes pagaron el gasto",
+                message: "El gasto debe generar una deuda para al menos un participante.",
                 path: ["participants", "_sum"],
             });
         }
+
+
     });
 
 export type ExpenseForm = z.infer<typeof ExpenseFormSchema>;

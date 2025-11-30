@@ -40,7 +40,7 @@ export const ImagePreviewModal = ({ imageUrl }: Props) => {
         <>
             <Pressable onPress={() => setOpen(true)}>
                 <Image
-                    className="min-h-96 w-full rounded-xl shadow-lg"
+                    className="h-96 w-full rounded-xl shadow-lg"
                     resizeMode="cover"
                     source={{ uri: imageUrl }}
                     alt="Expense evidence"
