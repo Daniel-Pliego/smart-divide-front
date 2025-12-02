@@ -13,7 +13,7 @@ export const UserAvatar = ({
     size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 }) => {
     return (
-        <Avatar className={`w-10 h-10 ${className}`} size={size}>
+        <Avatar className={`${className}`} size={size}>
             {photoUrl ? (
                 <AvatarImage
                     source={{

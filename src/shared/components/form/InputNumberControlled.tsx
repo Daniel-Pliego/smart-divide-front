@@ -11,9 +11,8 @@ export const InputNumberControlled = <T extends FieldValues>(props: InputProps<T
             {...props}
             InputComponent={({ value, onChange }) => (
                 <Input
-                    className={`${
-                        !error ? "border-0" : "border"
-                    }  h-14 py-3 px-2 bg-gray-100 rounded-lg shadow-gray-200 elevation-sm`}
+                    className={`${!error ? "border-0" : "border"
+                        }  h-14 py-3 px-2 bg-gray-100 rounded-lg shadow-gray-200 elevation-sm`}
                     isDisabled={rest?.readOnly}
                 >
                     <InputField

@@ -1,3 +1,5 @@
+import { CloseIcon, Icon } from "@/lib/gluestack-ui/ui/icon";
+import { NavigationButton } from "@/shared/components";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
@@ -33,6 +35,25 @@ export default function RootLayout() {
                     },
                     headerShadowVisible: false,
                     headerTintColor: "#fff",
+                }}
+            />
+            <Stack.Screen
+                name="group/[groupId]/payment/index"
+                options={{
+                    headerTitle: "Selecciona un prestamo",
+                    headerLeft: () => {
+                        return <NavigationButton>
+                            <Icon as={CloseIcon} className="w-6 h-6 mr-5" />
+                        </NavigationButton>
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="group/[groupId]/payment/create"
+                options={{
+                    headerTitle: "Realiza tu pago",
+                    gestureDirection: "vertical",
+                    animation: "slide_from_bottom",
                 }}
             />
         </Stack>

@@ -14,7 +14,7 @@ import { AccordionUserBalance, HistoryList } from "./components";
 
 export default function GroupDetailsScreen() {
     const { groupId } = useLocalSearchParams();
-    const { groupDetail, totalBalance, userBalance, history, hasTransactions, userId } =
+    const { groupDetail, totalBalance, userBalance, history, hasTransactions, userId, userHasDebts, userIsOwedMoney } =
         useGetGroupDetails(groupId as string);
 
     const groupIconType = ICON_BY_GROUP_TYPE[groupDetail.type as keyof typeof ICON_BY_GROUP_TYPE];
@@ -65,7 +65,7 @@ export default function GroupDetailsScreen() {
                                     }
                                     content={
                                         <VStack>
-                                            {totalBalance === 0 && (
+                                            {!userHasDebts && !userIsOwedMoney && (
                                                 <Text className="text-slate-700">
                                                     No cuentas con saldos pendientes
                                                 </Text>
@@ -100,17 +100,13 @@ export default function GroupDetailsScreen() {
                 }
             >
                 <HStack className="gap-4 mt-4">
-                    <Link href="/" asChild>
+                    <Link href=
+                        {`/sections/group/${groupId}/payment`} asChild>
                         <Pressable
-                            disabled={!totalBalance}
-                            className="p-2 bg-purple-700 rounded-md shadow-lg disabled:bg-gray-400"
+                            disabled={!userHasDebts}
+                            className="p-2 bg-purple-700 rounded-md shadow-lg disabled:bg-gray-200"
                         >
-                            <Text className="text-white font-medium">Liquidar deuda</Text>
-                        </Pressable>
-                    </Link>
-                    <Link href="/">
-                        <Pressable className="p-2 bg-purple-700 rounded-md shadow-lg">
-                            <Text className="text-white font-medium">Saldos</Text>
+                            <Text className={`${userHasDebts ? "text-white" : "text-gray-400"} font-medium`}>Liquidar deudas</Text>
                         </Pressable>
                     </Link>
                 </HStack>
