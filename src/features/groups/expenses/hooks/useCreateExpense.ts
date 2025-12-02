@@ -23,7 +23,7 @@ export const useCreateExpense = ({ showToast, groupId }: UseCreateExpenseProps) 
         }
 
         setTimeout(() => {
-            router.replace(`/(tabs)/(group)/${groupId}`);
+            router.back();
         }, 500);
     }, [tempEvidencePath, showToast, groupId]);
 

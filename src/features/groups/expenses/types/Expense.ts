@@ -44,6 +44,28 @@ export const ExpenseFormSchema = z
                 path: ["participants", "_sum"],
             });
         }
+
+        const balances = new Map<string, number>();
+
+        data.payers.forEach(p => {
+            balances.set(p.userId, (balances.get(p.userId) || 0) + Number(p.amountPaid));
+        });
+
+        data.participants.forEach(p => {
+            balances.set(p.userId, (balances.get(p.userId) || 0) - Number(p.amountPaid));
+        });
+
+        const everyoneHasZeroBalance = Array.from(balances.values()).every(balance => Math.abs(balance) < 0.001);
+
+        if (everyoneHasZeroBalance) {
+            ctx.addIssue({
+                code: "custom",
+                message: "El gasto debe generar una deuda para al menos un participante.",
+                path: ["participants", "_sum"],
+            });
+        }
+
+
     });
 
 export type ExpenseForm = z.infer<typeof ExpenseFormSchema>;

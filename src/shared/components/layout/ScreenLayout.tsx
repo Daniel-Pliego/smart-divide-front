@@ -8,9 +8,11 @@ interface ScreenLayoutProps {
 
 export const ScreenLayout = ({ children, header }: ScreenLayoutProps) => {
     return (
-        <ScrollView>
-            {header || null}
-            <Box className="mx-5 mb-10">{children}</Box>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <Box>
+                {header || null}
+                <Box className="mx-5 mb-10">{children}</Box>
+            </Box>
         </ScrollView>
     );
 };
