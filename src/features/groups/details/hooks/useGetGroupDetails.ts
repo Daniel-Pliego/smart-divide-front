@@ -23,6 +23,8 @@ export const useGetGroupDetails = (groupId: string) => {
     const { userBalance, payments = [], expenses = [], ...groupInfo } = data || {};
 
     const totalBalance = userBalance?.reduce((acc, curr) => acc + curr.balance, 0);
+    const userHasDebts = userBalance?.some((item) => item.balance < 0);
+    const userIsOwedMoney = userBalance?.some((item) => item.balance > 0);
 
     const history = [...payments, ...expenses].sort(
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -40,6 +42,8 @@ export const useGetGroupDetails = (groupId: string) => {
             ...groupInfo,
         },
         totalBalance: totalBalance || 0,
+        userIsOwedMoney,
+        userHasDebts,
         userBalance,
         history: historyGroupedByDate,
         hasTransactions: history.length > 0,

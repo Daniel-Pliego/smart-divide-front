@@ -21,7 +21,10 @@ export const useSignInState = ({ showToast}: useSignInStateProps) => {
     const mutation = useSignInService({ onSuccess, onError });
 
     const handleSubmit = (data: UserSignIn) => {
-        mutation.mutate(data);
+        mutation.mutate({
+            email: data.email.toLocaleLowerCase(),
+            password: data.password,
+        });
     };
 
     return {

@@ -4,9 +4,11 @@ export const mapSignUpFormToUserSignUp = (user: UserSignUpForm): UserSignUp => {
     return {
         name: user.name,
         lastName: user.lastName,
-        email: user.email,
+        email: user.email.toLocaleLowerCase(),
         password: user.password,
-        photoUrl: `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${user.name}+${user.lastName}`,
+        photoUrl: `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${`${user.name}-${user.lastName}`.replaceAll(
+            " ",
+            ""
+        )}`,
     };
-
-}
+};
