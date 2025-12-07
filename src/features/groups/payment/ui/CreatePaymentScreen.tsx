@@ -9,10 +9,11 @@ import { HandCoins, MoveRight } from 'lucide-react-native'
 import React from 'react'
 import { Text } from 'react-native'
 import useCreatePayment from '../hooks/useCreatePayment'
+import { useCreatePaymentSheet } from '../hooks/useCreatePaymentSheet'
 
 export const CreatePaymentScreen = () => {
-    const { debtToPay, control, errors, handleSubmit, onSubmit } = useCreatePayment();
-    const amountError = errors.amount;
+    const { debtToPay, control, formState, groupId, handleSubmit, onSubmit } = useCreatePayment();
+    const { handlePayment, isPending } = useCreatePaymentSheet();
 
     if (!debtToPay) {
         return null;
@@ -38,7 +39,7 @@ export const CreatePaymentScreen = () => {
                 <Box className="w-full">
                     <InputNumberControlled
                         control={control}
-                        error={amountError}
+                        error={formState.errors.amount}
                         name="amount"
                         keyboardType="numeric"
                         placeholder="0.00"
@@ -46,9 +47,15 @@ export const CreatePaymentScreen = () => {
                 </Box>
             </HStack>
 
-            <Button onPress={handleSubmit(onSubmit)} size="lg" className="w-2/3 bg-purple-700 rounded-lg">
-                <ButtonText className="text-xl">Realizar pago</ButtonText>
-            </Button>
+            <Box className="w-full items-center justify-center mt-5 gap-3">
+                <Button onPress={handleSubmit(onSubmit)} size="lg" className="w-2/3 bg-purple-700 rounded-md">
+                    <ButtonText className="text-xl">Registrar pago</ButtonText>
+                </Button>
+
+                <Button disabled={isPending} variant='outline' onPress={handleSubmit((data) => handlePayment({ fromUser: debtToPay.debtor.userId, toUser: debtToPay.creditor.userId, amount: Number(data.amount), groupId }))} size="lg" className="w-2/3 rounded-md border border-purple-700">
+                    <ButtonText className="text-xl text-slate-700">Registrar pago con tarjeta</ButtonText>
+                </Button>
+            </Box>
         </VStack>
     )
 }

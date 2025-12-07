@@ -1,6 +1,8 @@
 import { AuthProvider } from "@/features/auth/context/AuthContext";
 import { AuthValidator } from "@/features/auth/utils/AuthValidator";
+import { STRIPE_PUBLISHABLE_KEY } from "@/features/config/enviroment";
 import { GluestackUIProvider } from "@gluestack/gluestack-ui-provider";
+import { StripeProvider } from '@stripe/stripe-react-native';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -12,17 +14,19 @@ export default function RootLayout() {
     return (
         <SafeAreaProvider>
             <GluestackUIProvider>
-                <QueryClientProvider client={queryClient}>
-                    <AuthProvider>
-                        <AuthValidator />
-                        <Stack
-                            screenOptions={{
-                                headerShown: false,
-                                contentStyle: { backgroundColor: "#fff" },
-                            }}
-                        />
-                    </AuthProvider>
-                </QueryClientProvider>
+                <StripeProvider publishableKey={STRIPE_PUBLISHABLE_KEY}>
+                    <QueryClientProvider client={queryClient}>
+                        <AuthProvider>
+                            <AuthValidator />
+                            <Stack
+                                screenOptions={{
+                                    headerShown: false,
+                                    contentStyle: { backgroundColor: "#fff" },
+                                }}
+                            />
+                        </AuthProvider>
+                    </QueryClientProvider>
+                </StripeProvider>
             </GluestackUIProvider>
         </SafeAreaProvider>
     );

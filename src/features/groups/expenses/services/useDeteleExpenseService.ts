@@ -26,6 +26,7 @@ export const useDeteleExpenseService = ({
         onSuccess: () => {
             onSuccess();
             queryClient.invalidateQueries({ queryKey: ["group-detail", groupId] });
+            queryClient.invalidateQueries({ queryKey: ["group-list"] });
         },
         onError: (error) => {
             onError(error as AxiosError);
