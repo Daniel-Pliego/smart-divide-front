@@ -17,7 +17,7 @@ export const useRegisterTokenService = ({
 }: UseRegisterTokenServiceProps = {}) => {
     return useMutation({
         mutationFn: async (data: RegisterDeviceTokenDTO) => {
-            return await apiClient.post("/api/notifications/token", data);
+            return await apiClient.post("/notifications/token", data);
         },
         onSuccess: () => {
             onSuccess?.();

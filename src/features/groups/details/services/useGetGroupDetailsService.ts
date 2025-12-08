@@ -5,16 +5,15 @@ import { GroupDetails } from "../types";
 
 interface useGetGroupsService {
     groupId: string;
-    userId: string;
 }
 
-export const useGetGroupDetailsService = ({ groupId, userId }: useGetGroupsService) => {
+export const useGetGroupDetailsService = ({ groupId }: useGetGroupsService) => {
     return useQuery({
         queryKey: ["group-detail", groupId],
-        enabled: !!groupId && !!userId,
+        enabled: !!groupId,
         queryFn: async () => {
             const response = await apiClient.get<ResponseWrapper<GroupDetails>>(
-                `/user/${userId}/groups/${groupId}/transactions`
+                `/groups/${groupId}/transactions`
             );
 
             return response?.data?.body;

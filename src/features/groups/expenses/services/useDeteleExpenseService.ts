@@ -1,4 +1,3 @@
-import { getAuthStore } from "@/features/auth/utils";
 import { apiClient } from "@/features/config/api";
 import { ResponseWrapper } from "@/features/config/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -18,9 +17,8 @@ export const useDeteleExpenseService = ({
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (expenseId: string) => {
-            const authUser = await getAuthStore();
             await apiClient.delete<ResponseWrapper<void>>(
-                `/user/${authUser?.userId}/groups/${groupId}/expense/${expenseId}`
+                `/groups/${groupId}/expense/${expenseId}`
             );
         },
         onSuccess: () => {

@@ -1,4 +1,3 @@
-import { getAuthStore } from "@/features/auth/utils";
 import { apiClient } from "@/features/config/api";
 import { ResponseWrapper } from "@/features/config/types";
 import { useQuery } from "@tanstack/react-query";
@@ -8,10 +7,8 @@ export const useGetGroupListService = () => {
     return useQuery({
         queryKey: ["group-list"],
         queryFn: async () => {
-            const auth = await getAuthStore();
-
             const response = await apiClient.get<ResponseWrapper<GroupInfoResume[]>>(
-                `/user/${auth?.userId}/groups`
+                `/groups`
             );
 
             return response.data;
