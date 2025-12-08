@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import { CircleUserRound, ContactRound, UsersRound } from "lucide-react-native";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 
 export default function TabsLayout() {
     return (
@@ -30,11 +30,12 @@ export default function TabsLayout() {
                 }}
             />
             <Tabs.Screen
-                name="account/index"
+                name="account"
                 options={{
-                    title: "Cuenta",
+                    headerShown: true,
+                    title: "Perfil",
+                    headerShadowVisible: false,
                     tabBarIcon: ({ color }) => <CircleUserRound color={color} size={24} />,
-                    header: () => <Text>Hola mundo</Text>,
                 }}
             />
         </Tabs>

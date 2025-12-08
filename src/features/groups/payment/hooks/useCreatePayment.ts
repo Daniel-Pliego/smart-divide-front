@@ -33,7 +33,7 @@ export default function useCreatePayment() {
     const {
         control,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState,
         reset,
     } = useForm<CreatePaymentForm>({
         resolver: zodResolver(createPaymentSchema(debt?.amount ?? 0)),
@@ -93,7 +93,7 @@ export default function useCreatePayment() {
         control,
         handleSubmit,
         onSubmit,
-        errors,
-        isSubmitting
+        formState,
+        groupId: groupId as string,
     };
 }
