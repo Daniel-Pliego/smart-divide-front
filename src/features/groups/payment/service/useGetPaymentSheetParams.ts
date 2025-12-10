@@ -18,7 +18,7 @@ export function useGetPaymentSheetsParamsService() {
     }: CreatePaymentIntentPayload) => {
       const response =
         await apiClient.post<ResponseWrapper<PaymentSheetParams>>(
-          `api/stripe/${groupId}/paymentIntent`,
+          `/stripe/${groupId}/paymentIntent`,
           payload
         );
 

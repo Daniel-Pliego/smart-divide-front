@@ -1,4 +1,3 @@
-import { getAuthStore } from "@/features/auth/utils";
 import { apiClient } from "@/features/config/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -14,9 +13,7 @@ export const useCreateGroupService = ({ onSuccess, onError }: useCreateGroupServ
 
     return useMutation({
         mutationFn: async (data: GroupFormData) => {
-            const auth = await getAuthStore();
-
-            return await apiClient.post(`/user/${auth?.userId}/groups`, data);
+            return await apiClient.post(`/groups`, data);
         },
         onSuccess: () => {
             onSuccess();

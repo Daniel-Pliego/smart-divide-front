@@ -95,5 +95,6 @@ export default function useCreatePayment() {
         onSubmit,
         formState,
         groupId: groupId as string,
+        isSubmitting: createPayment.isPending
     };
 }

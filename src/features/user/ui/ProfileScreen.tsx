@@ -1,3 +1,4 @@
+import { useAuth } from "@/features/auth/context/AuthContext";
 import { Box } from "@/lib/gluestack-ui/ui/box";
 import { Button, ButtonText } from "@/lib/gluestack-ui/ui/button";
 import { HStack } from "@/lib/gluestack-ui/ui/hstack";
@@ -17,12 +18,14 @@ export default function ProfileScreen() {
     const { handleShowCustomerSheet } = useCreateCustomerSheet();
     const { user, isLoading } = useGetUserDetails()
     const [copied, setCopied] = useState(false);
+    const { logout } = useAuth();
+
 
     useEffect(() => {
         if (copied) {
             setTimeout(() => {
                 setCopied(false);
-            }, 3000);
+            }, 1000);
         }
     }, [copied])
 
@@ -36,21 +39,21 @@ export default function ProfileScreen() {
 
                     {
                         user?.isVerified ?
-                            <Text className="text-blue-500"> Cuenta verificada</Text> : <Text className="text-slate-500">Cuenta sin verificar</Text>
+                            <Text className="text-blue-500 text-lg"> Cuenta verificada</Text> : <Text className="text-slate-500">Cuenta sin verificar</Text>
                     }
                     {user?.isVerified ? <BadgeCheck size={15} color="#3b82f6" /> : <BadgeX size={15} color="#64748b" />}
                 </HStack>
 
             </VStack>
-            <Text className="text-slate-500 text-lg mt-5">Correo</Text>
-            <Text className="text-slate-700 text-xl">{user?.email}</Text>
+            <Text className="text-slate-900 text-xl font-medium mt-5">Correo</Text>
+            <Text className="text-slate-700 text-lg">{user?.email}</Text>
 
-            <Text className="text-slate-500 mt-3 text-lg">
+            <Text className="text-slate-900 a font-medium mt-3 text-xl">
                 Identificador
             </Text>
 
             <HStack className="gap-5">
-                <Text className="text-slate-700 text-xl">{user?.id.slice(0, 5)}...{user?.id.slice(-5)}</Text>
+                <Text className="text-slate-700 text-lg">{user?.id.slice(0, 5)}...{user?.id.slice(-5)}</Text>
                 {
                     !copied ?
                         <Pressable onPress={() => {
@@ -63,11 +66,11 @@ export default function ProfileScreen() {
             </HStack>
 
 
-            <Text className="text-slate-500 text-lg mt-5">Administrar datos bancarios</Text>
+            <Text className="text-slate-900 text-xl mt-5">Administrar datos bancarios</Text>
 
             <HStack className="flex-1 gap-3 mt-2">
 
-                <Box className="w-1/2">
+                <Box className="flex-1">
                     <Button onPress={initVerification} className="bg-violet-700 h-16">
                         <ButtonText className="text-lg text-center font-normal">
                             {user?.isVerified ? "Revisa los datos de tu cuenta" : "Verifica tu cuenta"}
@@ -88,6 +91,11 @@ export default function ProfileScreen() {
                 </Button>
             </HStack>
 
+            <Button onPress={logout} variant="outline" className="border border-purple-700 mt-10">
+                <ButtonText className="text-center text-lg font-normal text-purple-900">
+                    Cerrar sesión
+                </ButtonText>
+            </Button>
 
 
 

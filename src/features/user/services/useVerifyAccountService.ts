@@ -16,7 +16,7 @@ interface OnboardingResponse {
 export default function useVerifyAccountService() {
     return useMutation<ResponseWrapper<OnboardingResponse>, AxiosError, VerifyAccountArgs>({
         mutationFn: async ({ userId, returnUrl, refreshUrl }) => {
-            const endpoint = "/api/stripe/onboarding/link";
+            const endpoint = "/stripe/onboarding/link";
             const response = await apiClient.post(endpoint, null, {
                 params: {
                     userId,

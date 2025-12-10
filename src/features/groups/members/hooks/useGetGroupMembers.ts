@@ -15,5 +15,6 @@ export const useGetGroupMembers = (groupId: string) => {
             value: groupMember.userId,
             label: `${groupMember.name} ${groupMember.lastName}`,
         })),
+        isLoading
     };
 };

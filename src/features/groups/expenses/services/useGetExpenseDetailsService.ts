@@ -1,4 +1,3 @@
-import { getAuthStore } from "@/features/auth/utils";
 import { apiClient } from "@/features/config/api";
 import { ResponseWrapper } from "@/features/config/types";
 import { useQuery } from "@tanstack/react-query";
@@ -9,9 +8,8 @@ export const useGetExpenseDetailsService = (groupId: string, expenseId: string) 
         queryKey: ["expense-detail", groupId, expenseId],
         enabled: Boolean(groupId && expenseId),
         queryFn: async () => {
-            const authUser = await getAuthStore();
             const response = await apiClient.get<ResponseWrapper<ExpenseDetails>>(
-                `/user/${authUser?.userId}/groups/${groupId}/expense/${expenseId}`
+                `/groups/${groupId}/expense/${expenseId}`
             );
 
             return response.data.body;

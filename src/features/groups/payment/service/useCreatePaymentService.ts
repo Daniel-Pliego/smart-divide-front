@@ -1,4 +1,3 @@
-import { getAuthStore } from "@/features/auth/utils";
 import { apiClient } from "@/features/config/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -19,9 +18,7 @@ export const useCreatePaymentService = ({
 
     return useMutation({
         mutationFn: async (data: CreatePaymentRequest) => {
-            const auth = await getAuthStore();
-            const url = `user/${auth?.userId}/groups/${groupId}/payments`;
-            console.log("Creating payment:", { url, data, auth });
+            const url = `groups/${groupId}/payments`;
             return await apiClient.post(url, data);
         },
         onSuccess: () => {

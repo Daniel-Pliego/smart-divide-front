@@ -1,9 +1,14 @@
 import { useAppToast } from "@/shared/hooks";
 import { AddressCollectionMode, useStripe } from "@stripe/stripe-react-native";
 import { useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useRouter } from "expo-router";
 import { useGetPaymentSheetsParamsService } from "../service/useGetPaymentSheetParams";
 import { PaymentSheetParams } from "../types/PaymentSheetParams";
+
+const messagesForStatus: Record<number, string> = {
+    404: "No es posible realizar pagos con tarjeta a este usuario",
+};
 
 export const useCreatePaymentSheet = () => {
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
@@ -16,8 +21,6 @@ export const useCreatePaymentSheet = () => {
         queryClient.invalidateQueries({ queryKey: ["group-detail", groupId] });
         queryClient.invalidateQueries({ queryKey: ["group-list"] });
     };
-
-    AddressCollectionMode
 
     const navigateBackAfterPayment = () => {
         setTimeout(() => {
@@ -35,8 +38,8 @@ export const useCreatePaymentSheet = () => {
             allowsDelayedPaymentMethods: false,
             customFlow: false,
             billingDetailsCollectionConfiguration: {
-                address: AddressCollectionMode.NEVER
-            }
+                address: AddressCollectionMode.NEVER,
+            },
         });
 
         if (error) {
@@ -91,11 +94,14 @@ export const useCreatePaymentSheet = () => {
                     const ok = await initializePaymentSheet(paymentParams);
                     if (ok) openPaymentSheet(groupId);
                 },
-                onError: () => {
-                    showToast(
-                        "No se pudo iniciar el proceso de pago. Por favor intente de nuevo.",
-                        "error"
-                    );
+                onError: (error: Error) => {
+                    const axiosError = error as AxiosError;
+                    const status = axiosError?.response?.status;
+
+                    const errorMessage =
+                        messagesForStatus[status || 0] ??
+                        "No se pudo iniciar el proceso de pago. Por favor intente de nuevo.";
+                    showToast(errorMessage, "error");
                 },
             }
         );

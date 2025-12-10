@@ -3,7 +3,7 @@ import { getAuthToken, getCachedAuthToken, notifyUnauthorized } from "../auth/ut
 import { API_URL } from "./enviroment";
 
 export const apiClient = axios.create({
-    baseURL: API_URL,
+    baseURL: `${API_URL}/api`,
     timeout: 10000,
     headers: {
         "Content-Type": "application/json",

@@ -10,6 +10,7 @@ export default function _layout() {
                 contentStyle: {
                     backgroundColor: "#fff",
                 },
+                statusBarStyle: "dark"
             }}
         ></Stack>
     )

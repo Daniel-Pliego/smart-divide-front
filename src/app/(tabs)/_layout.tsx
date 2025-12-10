@@ -1,4 +1,4 @@
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import { CircleUserRound, ContactRound, UsersRound } from "lucide-react-native";
 import { StyleSheet } from "react-native";
 
@@ -17,15 +17,23 @@ export default function TabsLayout() {
         >
             <Tabs.Screen
                 name="(group)"
+                listeners={{
+                    tabPress: (e) => {
+                        e.preventDefault(); 
+                        router.replace("/(tabs)/(group)")
+                    }
+                }}
                 options={{
                     title: "Grupos",
                     tabBarIcon: ({ color }) => <UsersRound color={color} size={24} />,
                 }}
             />
             <Tabs.Screen
-                name="friends/index"
+                name="friends"
                 options={{
                     title: "Amigos",
+                    headerShown: false,
+                    headerShadowVisible: false,
                     tabBarIcon: ({ color }) => <ContactRound color={color} size={24} />,
                 }}
             />
@@ -33,7 +41,7 @@ export default function TabsLayout() {
                 name="account"
                 options={{
                     headerShown: true,
-                    title: "Perfil",
+                    title: "Tu perfil",
                     headerShadowVisible: false,
                     tabBarIcon: ({ color }) => <CircleUserRound color={color} size={24} />,
                 }}

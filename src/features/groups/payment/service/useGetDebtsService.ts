@@ -1,4 +1,3 @@
-import { getAuthStore } from "@/features/auth/utils";
 import { apiClient } from "@/features/config/api";
 import { ResponseWrapper } from "@/features/config/types";
 import { useQuery } from "@tanstack/react-query";
@@ -9,10 +8,8 @@ export function useGetDebtsService(groupId: string) {
         queryKey: ["debts", groupId],
         enabled: Boolean(groupId),
         queryFn: async () => {
-            const auth = await getAuthStore();
-
             const response = await apiClient.get<ResponseWrapper<Debts>>(
-                `groups/${groupId}/balances/users/${auth?.userId}`
+                `groups/${groupId}/balances`
             );
 
             return response.data.body;

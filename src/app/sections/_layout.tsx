@@ -49,11 +49,28 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
+                name="group/[groupId]/member/add"
+                options={{
+                    headerTitle: "Agrega un nuevo miembro",
+                    headerLeft: () => {
+                        return <NavigationButton>
+                            <Icon as={CloseIcon} className="w-6 h-6 mr-5" />
+                        </NavigationButton>
+                    }
+                }}
+            />
+            <Stack.Screen
                 name="group/[groupId]/payment/create"
                 options={{
                     headerTitle: "Realiza tu pago",
                     gestureDirection: "vertical",
                     animation: "slide_from_bottom",
+                }}
+            />
+            <Stack.Screen
+                name="group/[groupId]/index"
+                options={{
+                    headerTitle: "Información del grupo",
                 }}
             />
         </Stack>

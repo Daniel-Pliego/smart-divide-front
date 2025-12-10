@@ -10,6 +10,8 @@ import "./global.css";
 
 const queryClient = new QueryClient();
 
+import { NotificationProvider } from "@/features/notifications/context/NotificationContext";
+
 export default function RootLayout() {
     return (
         <SafeAreaProvider>
@@ -17,13 +19,15 @@ export default function RootLayout() {
                 <StripeProvider publishableKey={STRIPE_PUBLISHABLE_KEY}>
                     <QueryClientProvider client={queryClient}>
                         <AuthProvider>
-                            <AuthValidator />
-                            <Stack
-                                screenOptions={{
-                                    headerShown: false,
-                                    contentStyle: { backgroundColor: "#fff" },
-                                }}
-                            />
+                            <NotificationProvider>
+                                <AuthValidator />
+                                <Stack
+                                    screenOptions={{
+                                        headerShown: false,
+                                        contentStyle: { backgroundColor: "#fff" },
+                                    }}
+                                />
+                            </NotificationProvider>
                         </AuthProvider>
                     </QueryClientProvider>
                 </StripeProvider>
