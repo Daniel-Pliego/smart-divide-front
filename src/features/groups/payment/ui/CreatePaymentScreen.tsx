@@ -12,7 +12,7 @@ import useCreatePayment from '../hooks/useCreatePayment'
 import { useCreatePaymentSheet } from '../hooks/useCreatePaymentSheet'
 
 export const CreatePaymentScreen = () => {
-    const { debtToPay, control, formState, groupId, handleSubmit, onSubmit } = useCreatePayment();
+    const { debtToPay, control, formState, groupId, handleSubmit, onSubmit, isSubmitting } = useCreatePayment();
     const { handlePayment, isPending } = useCreatePaymentSheet();
 
     if (!debtToPay) {
@@ -48,11 +48,11 @@ export const CreatePaymentScreen = () => {
             </HStack>
 
             <Box className="w-full items-center justify-center mt-5 gap-3">
-                <Button onPress={handleSubmit(onSubmit)} size="lg" className="w-2/3 bg-purple-700 rounded-md">
+                <Button onPress={handleSubmit(onSubmit)} size="lg" className="w-2/3 bg-purple-700 rounded-md" disabled={isSubmitting}>
                     <ButtonText className="text-xl">Registrar pago</ButtonText>
                 </Button>
 
-                <Button disabled={isPending} variant='outline' onPress={handleSubmit((data) => handlePayment({ fromUser: debtToPay.debtor.userId, toUser: debtToPay.creditor.userId, amount: Number(data.amount), groupId }))} size="lg" className="w-2/3 rounded-md border border-purple-700">
+                <Button disabled={isPending} variant='outline' onPress={handleSubmit((data) => handlePayment({ fromUser: debtToPay.debtor.userId, toUser: debtToPay.creditor.userId, amount: Number(data.amount), groupId }))} size="lg" className="w-2/3 rounded-md border border-purple-700 py-1 h-auto">
                     <ButtonText className="text-xl text-slate-700">Registrar pago con tarjeta</ButtonText>
                 </Button>
             </Box>

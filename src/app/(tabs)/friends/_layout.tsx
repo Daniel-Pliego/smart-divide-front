@@ -12,6 +12,8 @@ export default function _layout() {
                 },
                 statusBarStyle: "dark"
             }}
-        ></Stack>
+        >
+
+        </Stack>
     )
 }

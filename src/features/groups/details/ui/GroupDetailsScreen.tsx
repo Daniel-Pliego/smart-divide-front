@@ -7,7 +7,8 @@ import { VStack } from "@/lib/gluestack-ui/ui/vstack";
 import { EmptyState, ScreenLayout } from "@/shared/components";
 import { toMoney } from "@/shared/utils";
 import WithouExpenses from "@assets/without-expenses.svg";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link, RelativePathString, Stack, useLocalSearchParams } from "expo-router";
+import { Bolt } from "lucide-react-native";
 import { Pressable, Text } from "react-native";
 import { useGetGroupDetails } from "../hooks";
 import { AccordionUserBalance, HistoryList } from "./components";
@@ -21,6 +22,22 @@ export default function GroupDetailsScreen() {
 
     return (
         <>
+            <Stack.Screen
+                options={
+                    {
+                        headerRight: () => (groupDetail &&
+                            <Link asChild href={{
+                                pathname: `/sections/group/${groupId}` as RelativePathString,
+                                params: { ...groupDetail }
+                            }}>
+                                <Pressable>
+                                    <Icon as={Bolt} className="w-7 h-7 text-white" />
+                                </Pressable>
+                            </Link>
+                        )
+                    }
+                }
+            />
             <ScreenLayout
                 header={
                     <>
