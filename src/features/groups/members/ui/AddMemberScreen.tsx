@@ -32,7 +32,7 @@ export default function AddMemberScreen() {
         )
       }
       <Button className={`${availableFriends.length === 0 ? 'border-gray-200 bg-gray-100' : 'bg-purple-700'} py-2 h-auto mt-5`} variant='outline' disabled={!memberSelected || isSubmitting} onPress={onSubmit}>
-        <ButtonText className='text-lg text-purple-700'>Agregar nuevo miembro</ButtonText>
+        <ButtonText className={`text-lg ${availableFriends.length === 0 ? 'text-gray-200' : 'text-white'}`}>Agregar nuevo miembro</ButtonText>
       </Button>
     </ScreenLayout>
   )

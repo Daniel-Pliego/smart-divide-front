@@ -53,7 +53,7 @@ export const CreatePaymentScreen = () => {
                 </Button>
 
                 <Button disabled={isPending} variant='outline' onPress={handleSubmit((data) => handlePayment({ fromUser: debtToPay.debtor.userId, toUser: debtToPay.creditor.userId, amount: Number(data.amount), groupId }))} size="lg" className="w-2/3 rounded-md border border-purple-700 py-1 h-auto">
-                    <ButtonText className="text-xl text-slate-700">Registrar pago con tarjeta</ButtonText>
+                    <ButtonText className="text-xl text-slate-700 text-center">Registrar pago con tarjeta</ButtonText>
                 </Button>
             </Box>
         </VStack>
